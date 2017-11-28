@@ -16,5 +16,5 @@
     <p class="warning">
         {l s='Your order has been declined' mod='hipay_enterprise'}
     </p>
-    <p><a href="{$link->getPageLink('order', true)}">{l s='Back to cart' mod='hipay_enterprise'}</a></p>
+    <p><a href="{$link->getPageLink('order', true)|escape:'html':'UTF-8'}">{l s='Back to cart' mod='hipay_enterprise'}</a></p>
 {/block}

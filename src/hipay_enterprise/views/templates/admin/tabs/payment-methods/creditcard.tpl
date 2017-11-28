@@ -26,7 +26,7 @@
                         <div class="col-lg-3">
                             <div class="row">
                                 <input type="text" name="ccDisplayName"
-                                       value="{$config_hipay.payment.global.ccDisplayName}"/>
+                                       value="{$config_hipay.payment.global.ccDisplayName|escape:'htmlall':'UTF-8'}"/>
                             </div>
                             <p class="help-block ">
                                 {l s='Display name for payment by credit card on your checkout page.' mod='hipay_enterprise'}
@@ -38,7 +38,7 @@
                         <div class="col-lg-1" style='width:45px;'>
                             <div class="row">
                                 <input type="text" class="money-type" name="ccFrontPosition"
-                                       value="{$config_hipay.payment.global.ccFrontPosition}"/>
+                                       value="{$config_hipay.payment.global.ccFrontPosition|escape:'htmlall':'UTF-8'}"/>
                             </div>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                         <li role="presentation" class="disabled summary credit-card-title"></li>
                         {foreach $config_hipay.payment.credit_card as $creditCard}
                             <li role="presentation" class="{if $creditCard@first} active {/if} ">
-                                <a href="#{$creditCard@key}" aria-controls="{$creditCard@key}" role="tab"
+                                <a href="#{$creditCard@key|escape:'htmlall':'UTF-8'}" aria-controls="{$creditCard@key|escape:'htmlall':'UTF-8'}" role="tab"
                                    data-toggle="tab">{l s=$creditCard["displayName"] mod='hipay_enterprise'}</a>
                             </li>
                         {/foreach}
@@ -58,7 +58,7 @@
                     <div class="tab-content col-md-10">
                         {foreach $config_hipay.payment.credit_card as $creditCard}
                             <div role="tabpanel" class="tab-pane {if $creditCard@first} active {/if}"
-                                 id="{$creditCard@key}">
+                                 id="{$creditCard@key|escape:'htmlall':'UTF-8'}">
                                 <div class="panel">
                                     <div class="row">
                                         <h4 class="col-lg-4 col-lg-offset-2">
@@ -71,14 +71,14 @@
                                         </label>
                                         <div class="col-lg-9">
                                             <span class="switch prestashop-switch fixed-width-lg">
-                                                <input type="radio" name="{$creditCard@key}_activated"
-                                                       id="{$creditCard@key}_activated_on" value="1"
+                                                <input type="radio" name="{$creditCard@key|escape:'htmlall':'UTF-8'}_activated"
+                                                       id="{$creditCard@key|escape:'htmlall':'UTF-8'}_activated_on" value="1"
                                                        {if $creditCard.activated }checked="checked"{/if} >
-                                                <label for="{$creditCard@key}_activated_on">{l s='Yes' mod='hipay_enterprise'}</label>
-                                                <input type="radio" name="{$creditCard@key}_activated"
-                                                       id="{$creditCard@key}_activated_off" value="0"
+                                                <label for="{$creditCard@key|escape:'htmlall':'UTF-8'}_activated_on">{l s='Yes' mod='hipay_enterprise'}</label>
+                                                <input type="radio" name="{$creditCard@key|escape:'htmlall':'UTF-8'}_activated"
+                                                       id="{$creditCard@key|escape:'htmlall':'UTF-8'}_activated_off" value="0"
                                                        {if $creditCard.activated == false }checked="checked"{/if} >
-                                                <label for="{$creditCard@key}_activated_off">{l s='No' mod='hipay_enterprise'}</label>
+                                                <label for="{$creditCard@key|escape:'htmlall':'UTF-8'}_activated_off">{l s='No' mod='hipay_enterprise'}</label>
                                                 <a class="slide-button btn"></a>
                                             </span>
                                         </div>
@@ -90,9 +90,9 @@
                                             <label class="control-label col-lg-2">{l s='Minimum order amount' mod='hipay_enterprise'}</label>
                                             <div class="input-group col-lg-2">
                                                 <input type="text" class="money-type"
-                                                       name="{$creditCard@key}_minAmount[EUR]"
-                                                       value="{$creditCard.minAmount.EUR}"/>
-                                                <span class="input-group-addon">{Currency::getDefaultCurrency()->sign}</span>
+                                                       name="{$creditCard@key|escape:'htmlall':'UTF-8'}_minAmount[EUR]"
+                                                       value="{$creditCard.minAmount.EUR|escape:'htmlall':'UTF-8'}"/>
+                                                <span class="input-group-addon">{Currency::getDefaultCurrency()->sign|escape:'html':'UTF-8'}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -102,9 +102,9 @@
                                             <label class="control-label col-lg-2">{l s='Maximum order amount' mod='hipay_enterprise'}</label>
                                             <div class="input-group col-lg-2">
                                                 <input type="text" class="money-type"
-                                                       name="{$creditCard@key}_maxAmount[EUR]"
-                                                       value="{$creditCard.maxAmount.EUR}"/>
-                                                <span class="input-group-addon">{Currency::getDefaultCurrency()->sign}</span>
+                                                       name="{$creditCard@key|escape:'htmlall':'UTF-8'}_maxAmount[EUR]"
+                                                       value="{$creditCard.maxAmount.EUR|escape:'htmlall':'UTF-8'}"/>
+                                                <span class="input-group-addon">{Currency::getDefaultCurrency()->sign|escape:'html':'UTF-8'}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -113,12 +113,12 @@
                                         <div class="form-group">
                                             <label class="control-label col-lg-2">{l s='Currencies' mod='hipay_enterprise'}</label>
                                             <div class="col-lg-9">
-                                                <select id="multiselect-{$creditCard@key}"
-                                                        name="{$creditCard@key}_currencies[]" multiple="multiple"
+                                                <select id="multiselect-{$creditCard@key|escape:'htmlall':'UTF-8'}"
+                                                        name="{$creditCard@key|escape:'htmlall':'UTF-8'}_currencies[]" multiple="multiple"
                                                         class="multiselect-currency">
                                                     {foreach $limitedCurrencies as $currency }
-                                                        <option value="{$currency@key}" {if $currency@key|in_array:$creditCard.currencies } selected {/if} >{$currency@key}
-                                                            - {$currency} </option>
+                                                        <option value="{$currency@key|escape:'htmlall':'UTF-8'}" {if $currency@key|in_array:$creditCard.currencies } selected {/if} >{$currency@key|escape:'htmlall':'UTF-8'}
+                                                            - {$currency|escape:'htmlall':'UTF-8'} </option>
                                                     {/foreach}
                                                 </select>
                                             </div>
@@ -129,10 +129,10 @@
                                         <div class="form-group">
                                             <label class="control-label col-lg-2">{l s='Countries' mod='hipay_enterprise'}</label>
                                             <div class="col-lg-6">
-                                                <select id="countries_{$creditCard@key}" multiple="multiple" size="10"
-                                                        name="{$creditCard@key}_countries[]">
+                                                <select id="countries_{$creditCard@key|escape:'htmlall':'UTF-8'}" multiple="multiple" size="10"
+                                                        name="{$creditCard@key|escape:'htmlall':'UTF-8'}_countries[]">
                                                     {foreach $limitedCountries as $country}
-                                                        <option value="{$country@key}" {if !empty($creditCard.countries) && $country@key|in_array:$creditCard.countries } selected {/if} >{$country}</option>
+                                                        <option value="{$country@key|escape:'htmlall':'UTF-8'}" {if !empty($creditCard.countries) && $country@key|in_array:$creditCard.countries } selected {/if} >{$country|escape:'htmlall':'UTF-8'}</option>
                                                     {/foreach}
                                                 </select>
                                             </div>
@@ -162,7 +162,7 @@
 </div>
 <script>
     {foreach $config_hipay.payment.credit_card as $creditCard}
-    var cc_{$creditCard@key|regex_replace:'/[^a-zA-Z0-9]/':""}_dualistbox = $('#countries_{$creditCard@key}').bootstrapDualListbox({
+    var cc_{$creditCard@key|regex_replace:'/[^a-zA-Z0-9]/':""}_dualistbox = $('#countries_{$creditCard@key|escape:'htmlall':'UTF-8'}').bootstrapDualListbox({
         showFilterInputs: false,
         moveOnSelect: false,
         nonSelectedListLabel: '{l s='Available countries' mod='hipay_enterprise'}',

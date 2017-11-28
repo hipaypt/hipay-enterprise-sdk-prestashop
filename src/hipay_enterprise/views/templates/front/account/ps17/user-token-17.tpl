@@ -31,14 +31,14 @@
 
             {foreach $savedCC as $cc}
                 <tr>
-                    <td><img src="{$this_path_ssl}/views/img/{$cc.brand|lower}_small.png"/> {$cc.pan}</td>
-                    <td>{$cc.card_holder}</td>
-                    <td>{"%02d"|sprintf:$cc.card_expiry_month} / {$cc.card_expiry_year}</td>
+                    <td><img src="{$this_path_ssl|escape:'html':'UTF-8'}/views/img/{$cc.brand|lower}_small.png"/> {$cc.pan|escape:'html':'UTF-8'}</td>
+                    <td>{$cc.card_holder|escape:'html':'UTF-8'}</td>
+                    <td>{"%02d"|sprintf:$cc.card_expiry_month} / {$cc.card_expiry_year|escape:'html':'UTF-8'}</td>
                     <td>
                         <form class="delTokenForm" enctype="application/x-www-form-urlencoded"
                               action="{$link->getModuleLink('hipay_enterprise', 'userToken', [], true)|escape:'html'}"
                               method="post">
-                            <input type="hidden" name="hipayCCTokenId" value="{$cc.hp_id}"/>
+                            <input type="hidden" name="hipayCCTokenId" value="{$cc.hp_id|escape:'html':'UTF-8'}"/>
                             <button type="submit" name="submitDelToken" class="btn btn-danger">
                                 <i class="material-icons"> delete </i>
                                 {l s='Delete' mod='hipay_enterprise'}

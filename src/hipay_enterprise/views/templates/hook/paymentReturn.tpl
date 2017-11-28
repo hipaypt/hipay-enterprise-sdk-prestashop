@@ -18,7 +18,7 @@
                 class="reference"><strong>{$reference|escape:'htmlall':'UTF-8'}</strong></span>
         <br/><br/>{l s='An email has been sent with this information.' mod='hipay_enterprise'}
         <br/><br/>{l s='If you have questions, comments or concerns, please contact our' mod='hipay_enterprise'} <a
-                href="{$link->getPageLink('contact', true)}">{l s='expert customer support team.' mod='hipay_enterprise'}</a>
+                href="{$link->getPageLink('contact', true)|escape:'html':'UTF-8'}">{l s='expert customer support team.' mod='hipay_enterprise'}</a>
     </p>
 {else}
     <h3>{l s='Your order has not been accepted.' mod='hipay_enterprise'}</h3>
@@ -27,7 +27,7 @@
                 class="reference"> <strong>{$reference|escape:'htmlall':'UTF-8'}</strong></span>
         <br/><br/>{l s='Please, try to order again.' mod='hipay_enterprise'}
         <br/><br/>{l s='If you have questions, comments or concerns, please contact our' mod='hipay_enterprise'} <a
-                href="{$link->getPageLink('contact', true)}">{l s='expert customer support team.' mod='hipay_enterprise'}</a>
+                href="{$link->getPageLink('contact', true)|escape:'html':'UTF-8'}">{l s='expert customer support team.' mod='hipay_enterprise'}</a>
     </p>
 {/if}
 <hr/>

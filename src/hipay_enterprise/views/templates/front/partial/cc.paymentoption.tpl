@@ -18,7 +18,7 @@
                 <img src="{$domain|cat:$payment_button|escape:'html':'UTF-8'}"
                      style="max-width: 160px;max-height: 50px;"
                      alt="{l s='Pay by credit card' mod='hipay_enterprise'}"/>
-                {l s='Pay by ' mod='hipay_enterprise' } {$configHipay.payment.global.ccDisplayName}
+                {l s='Pay by ' mod='hipay_enterprise' } {$configHipay.payment.global.ccDisplayName|escape:'html':'UTF-8'}
                 <span>
                     {if $configHipay.payment.global.operating_mode != 'api'}
                         {if $configHipay.payment.global.display_hosted_page != 'iframe'}

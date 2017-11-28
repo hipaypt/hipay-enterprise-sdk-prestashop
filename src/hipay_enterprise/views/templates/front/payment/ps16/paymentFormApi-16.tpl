@@ -47,9 +47,9 @@
                     {foreach $savedCC as $cc}
                         <div class="">
                             <label>
-                                <input type="radio" name="ccTokenHipay" id="ccTokenHipay" value="{$cc.token}"/>
-                                {$cc.pan} ({"%02d"|sprintf:$cc.card_expiry_month} / {$cc.card_expiry_year})
-                                - {$cc.card_holder} <img src="{$this_path_ssl}/views/img/{$cc.brand|lower}_small.png"/>
+                                <input type="radio" name="ccTokenHipay" id="ccTokenHipay" value="{$cc.token|escape:'html':'UTF-8'}"/>
+                                {$cc.pan|escape:'html':'UTF-8'} ({"%02d"|sprintf:$cc.card_expiry_month} / {$cc.card_expiry_year|escape:'html':'UTF-8'})
+                                - {$cc.card_holder|escape:'html':'UTF-8'} <img src="{$this_path_ssl|escape:'html':'UTF-8'}/views/img/{$cc.brand|lower|escape:'html':'UTF-8'}_small.png"/>
                             </label>
                         </div>
                         <br/>
@@ -67,7 +67,7 @@
             <h2 class="page-subheading">{l s='Pay by credit card' mod='hipay_enterprise'}</h2>
             {include file="$hipay_enterprise_tpl_dir/../front/partial/paymentError.tpl"}
             <div class="control-group">
-                <p><strong>{l s='Amount to pay ' mod='hipay_enterprise'}:</strong> {$amount} {$currency->iso_code} </p>
+                <p><strong>{l s='Amount to pay ' mod='hipay_enterprise'}:</strong> {$amount|escape:'html':'UTF-8'} {$currency->iso_code|escape:'html':'UTF-8'} </p>
                 <div style="clear: both;"></div>
             </div>
             <br/>
@@ -97,10 +97,10 @@
     </form>
     <p id="payment-loader-hp" style='text-align: center; display:none;'>
         <strong>{l s='Your payment is being processed. Please wait.' mod='hipay_enterprise'}</strong> <br/>
-        <img src="{$this_path_ssl}/views/img/loading.gif">
+        <img src="{$this_path_ssl|escape:'html':'UTF-8'}/views/img/loading.gif">
     </p>
 
-    <script type="text/javascript" src="{$this_path_ssl}views/js/card-tokenize.js"></script>
+    <script type="text/javascript" src="{$this_path_ssl|escape:'html':'UTF-8'}views/js/card-tokenize.js"></script>
 
     <script type="text/javascript" >
         var activatedCreditCard = JSON.parse('{$activatedCreditCard}');
@@ -108,12 +108,12 @@
         var myPaymentMethodSelected = true;
         {if $confHipay.account.global.sandbox_mode}
         var api_tokenjs_mode = "stage";
-        var api_tokenjs_username = "{$confHipay.account.sandbox.api_tokenjs_username_sandbox}";
-        var api_tokenjs_password_publickey = "{$confHipay.account.sandbox.api_tokenjs_password_publickey_sandbox}";
+        var api_tokenjs_username = "{$confHipay.account.sandbox.api_tokenjs_username_sandbox|escape:'html':'UTF-8'}";
+        var api_tokenjs_password_publickey = "{$confHipay.account.sandbox.api_tokenjs_password_publickey_sandbox|escape:'html':'UTF-8'}";
         {else}
         var api_tokenjs_mode = "production";
-        var api_tokenjs_username = "{$confHipay.account.production.api_tokenjs_username_production}";
-        var api_tokenjs_password_publickey = "{$confHipay.account.production.api_tokenjs_password_publickey_production}";
+        var api_tokenjs_username = "{$confHipay.account.production.api_tokenjs_username_production|escape:'html':'UTF-8'}";
+        var api_tokenjs_password_publickey = "{$confHipay.account.production.api_tokenjs_password_publickey_production|escape:'html':'UTF-8'}";
         {/if}
     </script>
 

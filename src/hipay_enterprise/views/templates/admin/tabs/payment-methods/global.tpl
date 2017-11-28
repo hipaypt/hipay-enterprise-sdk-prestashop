@@ -93,7 +93,7 @@
                     </label>
                     <div class="col-lg-4">
                         <input class="form-control" type="text" name="css_url"
-                               value="{$config_hipay.payment.global.css_url}">
+                               value="{$config_hipay.payment.global.css_url|escape:'htmlall':'UTF-8'}">
                         <p class="help-block">
                             {l s='URL to your CSS (style sheet) to customize your hosted page or iFrame (Important: the HTTPS protocol is required).' mod='hipay_enterprise'}
                         </p>
@@ -270,7 +270,7 @@
                     </div>
                     <div class="col-lg-3">
                         <input type="text" name="3d_secure_rules[total_price][value]"
-                               value="{$config_hipay.payment.global.3d_secure_rules[0].value}">
+                               value="{$config_hipay.payment.global.3d_secure_rules[0].value|escape:'htmlall':'UTF-8'}">
                     </div>
                 </div>
             </div>

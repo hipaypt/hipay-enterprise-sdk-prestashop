@@ -32,16 +32,16 @@
                                 {if !$localPayment["group"]["code"]|in_array:$arrayGroupSummaryDone}
                                     {assign var="groupSummary" value=$localPayment["group"]["code"]}
                                     <li role="presentation" class=" {if $localPayment@first} active {/if} ">
-                                        <a href="#{$localPayment["group"]["code"]}"
-                                           aria-controls="{$localPayment["group"]["code"]}" role="tab"
-                                           data-toggle="tab">{l s={$localPayment["group"]["label"]} mod='hipay_enterprise'}</a>
+                                        <a href="#{$localPayment["group"]["code"]|escape:'htmlall':'UTF-8'}"
+                                           aria-controls="{$localPayment["group"]["code"]|escape:'htmlall':'UTF-8'}" role="tab"
+                                           data-toggle="tab">{l s={$localPayment["group"]["label"]|escape:'htmlall':'UTF-8'} mod='hipay_enterprise'}</a>
                                     </li>
                                     {assign var="groupSummaryDone" value="$groupSummaryDone,$groupSummary"}
                                 {/if}
                             {/if}
                         {else}
                             <li role="presentation" class=" {if $localPayment@first} active {/if} ">
-                                <a href="#{$localPayment@key}" aria-controls="{$localPayment@key}" role="tab"
+                                <a href="#{$localPayment@key|escape:'htmlall':'UTF-8'}" aria-controls="{$localPayment@key|escape:'htmlall':'UTF-8'}" role="tab"
                                    data-toggle="tab">{l s=$localPayment["displayNameBO"] mod='hipay_enterprise'}</a>
                             </li>
                         {/if}
@@ -62,7 +62,7 @@
                                         {assign var="groupSummary" value=$localPayment["group"]["code"]}
                                         {assign var="groupSummaryDone" value="$groupSummaryDone,$groupSummary"}
                                         <div role="tabpanel" class="tab-pane {if $localPayment@first} active {/if}"
-                                             id="{$localPayment["group"]["code"]}">
+                                             id="{$localPayment["group"]["code"]|escape:'htmlall':'UTF-8'}">
                                             <div role="tabpanel">
                                                 <ul class="hipay-enterprise nav nav-tabs" role="tablist">
                                                     {foreach $config_hipay.payment.local_payment as $localPaymentGroup}
@@ -71,8 +71,8 @@
                                                                 {assign var="groupSummary" value=$localPayment["group"]["code"]}
                                                                 <li role="presentation"
                                                                     class="{if $localPaymentGroup@first} active {/if}">
-                                                                    <a href="#{$localPaymentGroup@key}"
-                                                                       aria-controls="{$localPaymentGroup@key}"
+                                                                    <a href="#{$localPaymentGroup@key|escape:'htmlall':'UTF-8'}"
+                                                                       aria-controls="{$localPaymentGroup@key|escape:'htmlall':'UTF-8'}"
                                                                        role="tab"
                                                                        data-toggle="tab">{l s=$localPaymentGroup["displayNameBO"] mod='hipay_enterprise'}</a>
                                                                 </li>
@@ -87,7 +87,7 @@
                                                         {if $localPayment["group"]["code"] == $localPaymentDetail["group"]["code"]}
                                                             <div role="tabpanel"
                                                                  class="tab-pane {if $localPaymentDetail@first} active {/if}"
-                                                                 id="{$localPaymentDetail@key}">
+                                                                 id="{$localPaymentDetail@key|escape:'htmlall':'UTF-8'}">
                                                                 {include file='./detail-local-payment.tpl' method=$localPaymentDetail
                                                                 key=$localPaymentDetail@key first=$localPaymentDetail@first}
                                                             </div>
@@ -125,7 +125,7 @@
 <script>
     {foreach $config_hipay.payment.local_payment as $localPayment}
     {if !$localPayment["countrySelectorReadOnly"]}
-    var local_{$localPayment@key|regex_replace:'/[^a-zA-Z0-9]/':""}_dualistbox = $('#countries_{$localPayment@key}').bootstrapDualListbox({
+    var local_{$localPayment@key|regex_replace:'/[^a-zA-Z0-9]/':""}_dualistbox = $('#countries_{$localPayment@key|escape:'htmlall':'UTF-8'}').bootstrapDualListbox({
         showFilterInputs: false,
         moveOnSelect: false,
         nonSelectedListLabel: '{l s='Available countries' mod='hipay_enterprise'}',

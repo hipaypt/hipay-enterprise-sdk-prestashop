@@ -33,18 +33,18 @@
         <p class="error">{l s='This credit card type or the order currency is not supported. Please choose a other payment method.' mod='hipay_enterprise'}</p>
     {else}
         <p class="error">
-            <strong>{l s='Error code' mod='hipay_enterprise'} : {$status_error}</strong>
+            <strong>{l s='Error code' mod='hipay_enterprise'} : {$status_error|escape:'html':'UTF-8'}</strong>
             <br/>
             {l s='An error occured, process has been cancelled.' mod='hipay_enterprise'}
         </p>
     {/if}
-    <form id="{$localPaymentName}" enctype="application/x-www-form-urlencoded" action="{$action|escape:'html'}"
+    <form id="{$localPaymentName|escape:'html':'UTF-8'}" enctype="application/x-www-form-urlencoded" action="{$action|escape:'html'}"
           class="form-horizontal col-lg-4 col-lg-offset-4"
           method="post" name="tokenizerForm" id="tokenizerForm" autocomplete="off">
         <div class="order_carrier_content box">
             <h2 class="page-subheading">{l s='Pay with %s' sprintf=$methodName mod='hipay_enterprise'}</h2>
             <div class="control-group">
-                <p><strong>{l s='Amount to pay ' mod='hipay_enterprise'}:</strong> {$amount} {$currency->iso_code} </p>
+                <p><strong>{l s='Amount to pay ' mod='hipay_enterprise'}:</strong> {$amount|escape:'html':'UTF-8'} {$currency->iso_code|escape:'html':'UTF-8'} </p>
                 <div style="clear: both;"></div>
             </div>
             <br/>
@@ -64,12 +64,12 @@
     </form>
     {include file="$hipay_enterprise_tpl_dir/front/partial/js.strings.tpl"}
     <script>
-        $("#{$localPaymentName}").submit(function (e) {
+        $("#{$localPaymentName|escape:'html':'UTF-8'}").submit(function (e) {
             // prevent form from being submitted 
             e.preventDefault();
             e.stopPropagation();
 
-            if (hiPayInputControl.checkControl('{$localPaymentName}')) {
+            if (hiPayInputControl.checkControl('{$localPaymentName|escape:'html':'UTF-8'}')) {
                 this.submit();
             }
 

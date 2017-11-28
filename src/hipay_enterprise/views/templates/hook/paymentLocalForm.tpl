@@ -26,7 +26,7 @@
         (function () {
             {foreach $methodFields as $name => $field}
             {if isset($field.controlType)}
-            hiPayInputControl.addInput('{$localPaymentName}', '{$localPaymentName}-{$name}', '{$field.controlType}', {if isset($field.required)}{$field.required}{else}false{/if});
+            hiPayInputControl.addInput('{$localPaymentName|escape:'html':'UTF-8'}', '{$localPaymentName|escape:'html':'UTF-8'}-{$name|escape:'html':'UTF-8'}', '{$field.controlType|escape:'html':'UTF-8'}', {if isset($field.required)}{$field.required|escape:'html':'UTF-8'}{else}false{/if});
             {/if}
             {/foreach}
         })();

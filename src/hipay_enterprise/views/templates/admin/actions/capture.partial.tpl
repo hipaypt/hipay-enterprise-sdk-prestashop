@@ -31,10 +31,10 @@
         <sup>*</sup> {l s='Amount will be updated once the capture will be confirmed by HiPay Enterprise' mod='hipay_enterprise'}
     </p>
 
-    <form action="{$captureLink}" method="post" id="hipay_capture_form" class="">
-        <input type="hidden" name="id_order" value="{$orderId}"/>
-        <input type="hidden" name="id_emp" value="{$employeeId}"/>
-        <input type="hidden" name="token" value="{$tokenCapture}"/>
+    <form action="{$captureLink|escape:'htmlall':'UTF-8'}" method="post" id="hipay_capture_form" class="">
+        <input type="hidden" name="id_order" value="{$orderId|escape:'htmlall':'UTF-8'}"/>
+        <input type="hidden" name="id_emp" value="{$employeeId|escape:'htmlall':'UTF-8'}"/>
+        <input type="hidden" name="token" value="{$tokenCapture|escape:'htmlall':'UTF-8'}"/>
         <div class="form-group">
             <label class="col-lg-4" for="hipay_capture_type">{l s='Capture type' mod='hipay_enterprise'}</label>
             <select id="hipay_capture_type" name="hipay_capture_type" class="col-lg-3">
@@ -50,7 +50,7 @@
             {if !$basket}
                 <label class="control-label "
                        for="hipay_capture_amount">{l s='Capture amount' mod='hipay_enterprise'}</label>
-                <input type="text" name="hipay_capture_amount" value="{$stillToCapture}"/>
+                <input type="text" name="hipay_capture_amount" value="{$stillToCapture|escape:'htmlall':'UTF-8'}"/>
             {else}
                 <table class="table table-item-hipay">
                     <thead>
@@ -70,12 +70,12 @@
                         {/if}
                         <tr>
                             <td>
-                                {$item["reference"]}
+                                {$item["reference"]|escape:'htmlall':'UTF-8'}
                             </td>
                             <td>
                                 <input type="hidden" {if $remainQty == 0} disabled {/if}
-                                       name="hipaycapture[{$item["product_id"]}]"
-                                       value="{$item["product_id"]}"/>{$item["product_name"]}
+                                       name="hipaycapture[{$item["product_id"]|escape:'htmlall':'UTF-8'}]"
+                                       value="{$item["product_id"]|escape:'htmlall':'UTF-8'}"/>{$item["product_name"]|escape:'htmlall':'UTF-8'}
                             </td>
                             <td>
                                 {displayPrice price=$item.product_price_wt currency=$id_currency}
@@ -83,7 +83,7 @@
                             <td>
                                 {if !empty($capturedItems) && isset($capturedItems[$item["product_id"]])}
                                     <span class="badge {if $remainQty == 0}badge-success{else}badge-warning{/if}">
-                                            {$capturedItems[$item["product_id"]]["quantity"]}
+                                            {$capturedItems[$item["product_id"]]["quantity"]|escape:'htmlall':'UTF-8'}
                                         </span>
                                 {else}
                                     <span class="badge badge-warning">0</span>
@@ -99,11 +99,11 @@
                             <td>
                                 <div class="col-lg-6 input-group">
                                     {if $remainQty > 0}
-                                        <input data-unit-price="{$item.unit_price_tax_incl}"
-                                               class="good-selector-capture" id="good-selector-{$item["product_id"]}"
-                                               name="hipaycapture[{$item["product_id"]}]" type="number" min="0"
-                                               max="{$remainQty}" name="" value="0">
-                                        <div class="input-group-addon">/ {$remainQty}</div>
+                                        <input data-unit-price="{$item.unit_price_tax_incl|escape:'htmlall':'UTF-8'}"
+                                               class="good-selector-capture" id="good-selector-{$item["product_id"]|escape:'htmlall':'UTF-8'}"
+                                               name="hipaycapture[{$item["product_id"]|escape:'htmlall':'UTF-8'}]" type="number" min="0"
+                                               max="{$remainQty|escape:'htmlall':'UTF-8'}" name="" value="0">
+                                        <div class="input-group-addon">/ {$remainQty|escape:'htmlall':'UTF-8'}</div>
                                     {else}
                                         <span class="badge badge-danger">0</span>
                                     {/if}
@@ -123,7 +123,7 @@
                         <td>
                             {if $shippingCost > 0 }
                                 {if !$capturedFees}
-                                    <input id="capture-fee" data-amount="{$amountFees}" type="checkbox"
+                                    <input id="capture-fee" data-amount="{$amountFees|escape:'htmlall':'UTF-8'}" type="checkbox"
                                            name="hipay_capture_fee">
                                     {l s='Capture fee(s)' mod='hipay_enterprise'}
                                 {else}
@@ -138,7 +138,7 @@
                     {if !empty($discount)}
                         <tr>
                             <td></td>
-                            <td>{l s='Discount' mod='hipay_enterprise'} {$discount.name}</td>
+                            <td>{l s='Discount' mod='hipay_enterprise'} {$discount.name|escape:'htmlall':'UTF-8'}</td>
                             <td>
                                          <span>
                                              {displayPrice price=-1*$discount.value currency=$id_currency}
@@ -146,10 +146,10 @@
                             </td>
                             <td>
                                 {if !$capturedDiscounts}
-                                    <input id="capture-discount" data-amount="{$discount.value}" type="checkbox"
+                                    <input id="capture-discount" data-amount="{$discount.value|escape:'htmlall':'UTF-8'}" type="checkbox"
                                            name="hipay_capture_discount">
                                     {l s='Capture Discount' mod='hipay_enterprise'}
-                                    <input type="hidden" name="capture-discount-amount" value="{$discount.value}"/>
+                                    <input type="hidden" name="capture-discount-amount" value="{$discount.value|escape:'htmlall':'UTF-8'}"/>
                                 {else}
                                     <span class="badge badge-success">Captured</span>
                                 {/if}
@@ -203,7 +203,7 @@
         var capturedDiscount = false;
         {/if}
 
-        var stillToCapture = {$stillToCapture};
+        var stillToCapture = {$stillToCapture|escape:'htmlall':'UTF-8'};
 
         updatePrice();
 

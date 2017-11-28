@@ -30,18 +30,18 @@
                             {foreach $psCategories as $cat}
                                 <tr>
                                     <td>
-                                        <input type="hidden" value="{$cat["id_category"]}"
-                                               name="ps_map_{$cat["id_category"]}"/>
-                                        {$cat["name"]}
+                                        <input type="hidden" value="{$cat["id_category"]|escape:'htmlall':'UTF-8'}"
+                                               name="ps_map_{$cat["id_category"]|escape:'htmlall':'UTF-8'}"/>
+                                        {$cat["name"]|escape:'htmlall':'UTF-8'}
                                     </td>
                                     <td>
-                                        <select name="hipay_map_{$cat["id_category"]}">
+                                        <select name="hipay_map_{$cat["id_category"]|escape:'htmlall':'UTF-8'}">
                                             {if !isset($mappedCategories[$cat["id_category"]])}
                                                 <option value="">{l s='- Select category - ' mod='hipay_enterprise'}</option>
                                             {/if}
                                             {foreach $hipayCategories as $hpcat}
                                                 <option {if isset($mappedCategories[$cat["id_category"]]) && $mappedCategories[$cat["id_category"]] eq  $hpcat->getCode()} selected {/if}
-                                                        value="{$hpcat->getCode()}">{$hpcat->getLocal($lang|upper)}</option>
+                                                        value="{$hpcat->getCode()|escape:'htmlall':'UTF-8'}">{$hpcat->getLocal($lang|upper)|escape:'htmlall':'UTF-8'}</option>
                                             {/foreach}
                                         </select>
                                     </td>

@@ -16,10 +16,10 @@
     <p class="help-block">
         <sup>*</sup> {l s='Amount will be updated once the refund will be confirmed by HiPay Enterprise' mod='hipay_enterprise'}
     </p>
-    <form action="{$refundLink}" method="post" id="hipay_refund_form" class="form-horizontal ">
-        <input type="hidden" name="id_order" value="{$orderId}"/>
-        <input type="hidden" name="id_emp" value="{$employeeId}"/>
-        <input type="hidden" name="token" value="{$tokenRefund}"/>
+    <form action="{$refundLink|escape:'htmlall':'UTF-8'}" method="post" id="hipay_refund_form" class="form-horizontal ">
+        <input type="hidden" name="id_order" value="{$orderId|escape:'htmlall':'UTF-8'}"/>
+        <input type="hidden" name="id_emp" value="{$employeeId|escape:'htmlall':'UTF-8'}"/>
+        <input type="hidden" name="token" value="{$tokenRefund|escape:'htmlall':'UTF-8'}"/>
         <div class="form-group">
             <label class="col-lg-4" for="hipay_refund_type">{l s='Refund type'  mod='hipay_enterprise'}</label>
             <select id="hipay_refund_type" name="hipay_refund_type" class="col-lg-3">
@@ -34,7 +34,7 @@
             {if !$basket}
                 <label class="control-label "
                        for="hipay_refund_amount">{l s='Refund amount' mod='hipay_enterprise'}</label>
-                <input type="text" name="hipay_refund_amount" value="{$refundableAmount}"/>
+                <input type="text" name="hipay_refund_amount" value="{$refundableAmount|escape:'htmlall':'UTF-8'}"/>
             {else}
                 <table class="table table-item-hipay">
                     <thead>
@@ -62,12 +62,12 @@
                         {/if}
                         <tr>
                             <td>
-                                {$item["reference"]}
+                                {$item["reference"]|escape:'htmlall':'UTF-8'}
                             </td>
                             <td>
                                 <input type="hidden" {if $remainQty == 0} disabled {/if}
-                                       name="hipayrefund[{$item["product_id"]}]"
-                                       value="{$item["product_id"]}"/>{$item["product_name"]}
+                                       name="hipayrefund[{$item["product_id"]|escape:'htmlall':'UTF-8'}]"
+                                       value="{$item["product_id"]|escape:'htmlall':'UTF-8'}"/>{$item["product_name"]|escape:'htmlall':'UTF-8'}
                             </td>
                             <td>
                                 {displayPrice price=$item.product_price_wt currency=$id_currency}
@@ -75,26 +75,24 @@
                             <td>
                                 {if !empty($refundedItems) && isset($refundedItems[$item["product_id"]])}
                                 <span class="badge {if $remainQty == 0}badge-success{else}badge-warning{/if}">
-                                            {$refundedItems[$item["product_id"]]["quantity"]}
+                                            {$refundedItems[$item["product_id"]]["quantity"]|escape:'htmlall':'UTF-8'}
                                     {/if}
                                     {if !empty($refundedItems) && isset($refundedItems[$item["product_id"]])}
                                         <span class="badge {if $remainQty == 0}badge-success{else}badge-warning{/if}">
                                             {displayPrice price=$refundedItems[$item["product_id"]]["amount"] currency=$id_currency}
                                         </span>
-
-{else}
-
+                                    {else}
                                         <span class="badge badge-warning">{displayPrice price=0 currency=$id_currency}</span>
                                     {/if}
                             </td>
                             <td>
                                 {if $remainQty > 0}
                                     <div class="col-lg-6 input-group">
-                                        <input data-unit-price="{$item.unit_price_tax_incl}"
-                                               class="good-selector-refund" name="hipayrefund[{$item["product_id"]}]"
+                                        <input data-unit-price="{$item.unit_price_tax_incl|escape:'htmlall':'UTF-8'}"
+                                               class="good-selector-refund" name="hipayrefund[{$item["product_id"]|escape:'htmlall':'UTF-8'}]"
                                                type="number" min="0"
-                                               max="{$remainQty}" name="" value="0">
-                                        <div class="input-group-addon">/ {$remainQty}</div>
+                                               max="{$remainQty|escape:'htmlall':'UTF-8'}" name="" value="0">
+                                        <div class="input-group-addon">/ {$remainQty|escape:'htmlall':'UTF-8'}</div>
                                     </div>
                                 {/if}
                             </td>
@@ -112,7 +110,7 @@
                         <td>
                             {if $shippingCost > 0 }
                                 {if ($capturedFees && !$refundedFees) || ($stillToCaptureDisplay <= 0 && !$refundedFees)}
-                                    <input id="refund-fee" data-amount="{$amountFees}" type="checkbox"
+                                    <input id="refund-fee" data-amount="{$amountFees|escape:'htmlall':'UTF-8'}" type="checkbox"
                                            name="hipay_refund_fee">
                                     {l s='Refund fee(s)'  mod='hipay_enterprise'}
                                 {else}
@@ -127,7 +125,7 @@
                     {if !empty($discount)}
                         <tr>
                             <td></td>
-                            <td>{l s='Discount' mod='hipay_enterprise'} {$discount.name}</td>
+                            <td>{l s='Discount' mod='hipay_enterprise'} {$discount.name|escape:'htmlall':'UTF-8'}</td>
                             <td>
                                      <span>
                                          {displayPrice price=-1*$discount.value currency=$id_currency}
@@ -135,7 +133,7 @@
                             </td>
                             <td>
                                 {if !$refundedDiscounts}
-                                    <input id="refund-discount" data-amount="{$discount.value}" type="checkbox"
+                                    <input id="refund-discount" data-amount="{$discount.value|escape:'htmlall':'UTF-8'}" type="checkbox"
                                            name="hipay_refund_discount">
                                     {l s='Refund Discount' mod='hipay_enterprise'}
                                 {else}
@@ -185,7 +183,7 @@
         });
 
         var currencySign = "€";
-        var refundableAmount = {$refundableAmount};
+        var refundableAmount = {$refundableAmount|escape:'htmlall':'UTF-8'};
         {if $refundedDiscounts}
         var refundedDiscount = true;
         {else}

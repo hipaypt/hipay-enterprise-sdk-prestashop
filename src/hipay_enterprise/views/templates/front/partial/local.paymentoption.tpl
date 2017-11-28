@@ -11,14 +11,14 @@
  *}
 <div class="row">
     <div class="col-xs-12 col-md-12">
-        <form class="localpayment" method="post" action="{$paymentProduct.link}">
+        <form class="localpayment" method="post" action="{$paymentProduct.link|escape:'html':'UTF-8'}">
             <p class="payment_module" id="hipay_payment_button">
                 <a href="javascript:void(0);" onclick="{literal}$(this).closest('form').submit();{/literal}"
-                   title="{l s='Pay by ' mod='hipay_enterprise' } {$paymentProduct.displayName}"
+                   title="{l s='Pay by ' mod='hipay_enterprise' } {$paymentProduct.displayName|escape:'html':'UTF-8'}"
                    style="padding-left: 13px;">
                     <img src="{$domain|cat:$paymentProduct.payment_button|escape:'html':'UTF-8'}"
-                         style="max-width: 160px;max-height: 50px;" alt="{$paymentProduct.displayName}"/>
-                    {l s='Pay by ' mod='hipay_enterprise' } {$paymentProduct.displayName}
+                         style="max-width: 160px;max-height: 50px;" alt="{$paymentProduct.displayName|escape:'html':'UTF-8'}"/>
+                    {l s='Pay by ' mod='hipay_enterprise' } {$paymentProduct.displayName|escape:'html':'UTF-8'}
                     <span>
                         {if $configHipay.payment.global.operating_mode != 'api'}
                             {if $configHipay.payment.global.display_hosted_page != 'iframe'}
@@ -31,7 +31,7 @@
                     </span>
                 </a>
             </p>
-            <input id="ioBB_{$paymentProduct@key}" class="ioBB" type="hidden" name="ioBB">
+            <input id="ioBB_{$paymentProduct@key|escape:'html':'UTF-8'}" class="ioBB" type="hidden" name="ioBB">
         </form>
     </div>
 </div>

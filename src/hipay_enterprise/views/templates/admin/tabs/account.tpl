@@ -69,7 +69,7 @@
                             </label>
                             <div class="col-lg-6">
                                 <input class="form-control" type="text" name="api_username_production"
-                                       value="{$config_hipay.account.production.api_username_production}">
+                                       value="{$config_hipay.account.production.api_username_production|escape:'htmlall':'UTF-8'}">
                             </div>
                         </div>
 
@@ -79,7 +79,7 @@
                             </label>
                             <div class="col-lg-6">
                                 <input class="form-control" type="password" name="api_password_production"
-                                       value="{$config_hipay.account.production.api_password_production}">
+                                       value="{$config_hipay.account.production.api_password_production|escape:'htmlall':'UTF-8'}">
                             </div>
                         </div>
                         <div class="form-group">
@@ -89,7 +89,7 @@
                             <div class="col-lg-6">
                                 <input class="form-control" type="password"
                                        name="api_secret_passphrase_production"
-                                       value="{$config_hipay.account.production.api_secret_passphrase_production}">
+                                       value="{$config_hipay.account.production.api_secret_passphrase_production|escape:'htmlall':'UTF-8'}">
                             </div>
                         </div>
                         <h5 class="col-lg-offset-2 col-xs-offset-4">{l s='Tokenization (Public)' mod='hipay_enterprise'}</h5>
@@ -100,7 +100,7 @@
                             <div class="col-lg-6">
                                 <input class="form-control" type="text"
                                        name="api_tokenjs_username_production"
-                                       value="{$config_hipay.account.production.api_tokenjs_username_production}">
+                                       value="{$config_hipay.account.production.api_tokenjs_username_production|escape:'htmlall':'UTF-8'}">
                             </div>
                         </div>
 
@@ -111,7 +111,7 @@
                             <div class="col-lg-6">
                                 <input class="form-control" type="password"
                                        name="api_tokenjs_password_publickey_production"
-                                       value="{$config_hipay.account.production.api_tokenjs_password_publickey_production}">
+                                       value="{$config_hipay.account.production.api_tokenjs_password_publickey_production|escape:'htmlall':'UTF-8'}">
                             </div>
                         </div>
                         <h5 class="col-lg-offset-2 col-xs-offset-4">{l s='MO/TO account credentials' mod='hipay_enterprise'}</h5>
@@ -121,7 +121,7 @@
                             </label>
                             <div class="col-lg-6">
                                 <input class="form-control" type="text" name="api_moto_username_production"
-                                       value="{$config_hipay.account.production.api_moto_username_production}">
+                                       value="{$config_hipay.account.production.api_moto_username_production|escape:'htmlall':'UTF-8'}">
                             </div>
                         </div>
 
@@ -131,7 +131,7 @@
                             </label>
                             <div class="col-lg-6">
                                 <input class="form-control" type="text" name="api_moto_password_production"
-                                       value="{$config_hipay.account.production.api_moto_password_production}">
+                                       value="{$config_hipay.account.production.api_moto_password_production|escape:'htmlall':'UTF-8'}">
                             </div>
                         </div>
 
@@ -142,7 +142,7 @@
                             <div class="col-lg-6">
                                 <input class="form-control" type="text"
                                        name="api_moto_secret_passphrase_production"
-                                       value="{$config_hipay.account.production.api_moto_secret_passphrase_production}">
+                                       value="{$config_hipay.account.production.api_moto_secret_passphrase_production|escape:'htmlall':'UTF-8'}">
                             </div>
                         </div>
                     </div>
@@ -178,7 +178,7 @@
                             </label>
                             <div class="col-lg-6">
                                 <input class="form-control" type="text" name="api_username_sandbox"
-                                       value="{$config_hipay.account.sandbox.api_username_sandbox}">
+                                       value="{$config_hipay.account.sandbox.api_username_sandbox|escape:'htmlall':'UTF-8'}">
                             </div>
                         </div>
 
@@ -188,7 +188,7 @@
                             </label>
                             <div class="col-lg-6">
                                 <input class="form-control" type="password" name="api_password_sandbox"
-                                       value="{$config_hipay.account.sandbox.api_password_sandbox}">
+                                       value="{$config_hipay.account.sandbox.api_password_sandbox|escape:'htmlall':'UTF-8'}">
                             </div>
                         </div>
 
@@ -198,7 +198,7 @@
                             </label>
                             <div class="col-lg-6">
                                 <input class="form-control" type="password" name="api_secret_passphrase_sandbox"
-                                       value="{$config_hipay.account.sandbox.api_secret_passphrase_sandbox}">
+                                       value="{$config_hipay.account.sandbox.api_secret_passphrase_sandbox|escape:'htmlall':'UTF-8'}">
                             </div>
                         </div>
                         <h5 class="col-lg-offset-2 col-xs-offset-4">{l s='Tokenization (Public)' mod='hipay_enterprise'}</h5>
@@ -208,7 +208,7 @@
                             </label>
                             <div class="col-lg-6">
                                 <input class="form-control" type="text" name="api_tokenjs_username_sandbox"
-                                       value="{$config_hipay.account.sandbox.api_tokenjs_username_sandbox}">
+                                       value="{$config_hipay.account.sandbox.api_tokenjs_username_sandbox|escape:'htmlall':'UTF-8'}">
                             </div>
                         </div>
                         <div class="form-group">
@@ -218,7 +218,7 @@
                             <div class="col-lg-6">
                                 <input class="form-control" type="password"
                                        name="api_tokenjs_password_publickey_sandbox"
-                                       value="{$config_hipay.account.sandbox.api_tokenjs_password_publickey_sandbox}">
+                                       value="{$config_hipay.account.sandbox.api_tokenjs_password_publickey_sandbox|escape:'htmlall':'UTF-8'}">
                             </div>
                         </div>
                         <h5 class="col-lg-offset-2 col-xs-offset-4">{l s='MO/TO account credentials' mod='hipay_enterprise'}</h5>
@@ -228,7 +228,7 @@
                             </label>
                             <div class="col-lg-6">
                                 <input class="form-control" type="text" name="api_moto_username_sandbox"
-                                       value="{$config_hipay.account.sandbox.api_moto_username_sandbox}">
+                                       value="{$config_hipay.account.sandbox.api_moto_username_sandbox|escape:'htmlall':'UTF-8'}">
                             </div>
                         </div>
 
@@ -238,7 +238,7 @@
                             </label>
                             <div class="col-lg-6">
                                 <input class="form-control" type="text" name="api_moto_password_sandbox"
-                                       value="{$config_hipay.account.sandbox.api_moto_password_sandbox}">
+                                       value="{$config_hipay.account.sandbox.api_moto_password_sandbox|escape:'htmlall':'UTF-8'}">
                             </div>
                         </div>
 
@@ -249,7 +249,7 @@
                             <div class="col-lg-6">
                                 <input class="form-control" type="text"
                                        name="api_moto_secret_passphrase_sandbox"
-                                       value="{$config_hipay.account.sandbox.api_moto_secret_passphrase_sandbox}">
+                                       value="{$config_hipay.account.sandbox.api_moto_secret_passphrase_sandbox|escape:'htmlall':'UTF-8'}">
                             </div>
                         </div>
                     </div>
@@ -286,7 +286,7 @@
                                 </label>
                                 <div class="col-lg-6">
                                     <input class="form-control" type="text" name="host_proxy"
-                                           value="{$config_hipay.account.global.host_proxy}">
+                                           value="{$config_hipay.account.global.host_proxy|escape:'htmlall':'UTF-8'}">
                                 </div>
                             </div>
 
@@ -296,7 +296,7 @@
                                 </label>
                                 <div class="col-lg-6">
                                     <input class="form-control" type="text" name="port_proxy"
-                                           value="{$config_hipay.account.global.port_proxy}">
+                                           value="{$config_hipay.account.global.port_proxy|escape:'htmlall':'UTF-8'}">
                                 </div>
                             </div>
 
@@ -306,7 +306,7 @@
                                 </label>
                                 <div class="col-lg-6">
                                     <input class="form-control" type="text" name="user_proxy"
-                                           value="{$config_hipay.account.global.user_proxy}">
+                                           value="{$config_hipay.account.global.user_proxy|escape:'htmlall':'UTF-8'}">
                                 </div>
                             </div>
 
@@ -316,7 +316,7 @@
                                 </label>
                                 <div class="col-lg-6">
                                     <input class="form-control" type="text" name="password_proxy"
-                                           value="{$config_hipay.account.global.password_proxy}">
+                                           value="{$config_hipay.account.global.password_proxy|escape:'htmlall':'UTF-8'}">
                                 </div>
                             </div>
                         </div>

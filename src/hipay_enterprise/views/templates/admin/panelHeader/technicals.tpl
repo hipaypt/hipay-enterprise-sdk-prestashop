@@ -26,19 +26,19 @@
         </div>
         <div class="row technical-information">
             <label class="col-lg-3">{l s='HiPay module' mod='hipay_enterprise'}</label><span
-                    class="col-lg-9">: {$source['integration_version']}</span>
+                    class="col-lg-9">: {$source['integration_version']|escape:'htmlall':'UTF-8'}</span>
         </div>
         <div class="row">
             <label class="col-lg-3">{l s='Prestashop version' mod='hipay_enterprise'}</label><span
-                    class="col-lg-9">: {$source['brand_version']}</span>
+                    class="col-lg-9">: {$source['brand_version']|escape:'htmlall':'UTF-8'}</span>
         </div>
         <div class="row">
             <label class="col-lg-3">{l s='IP Address' mod='hipay_enterprise'}</label><span
-                    class="col-lg-9">: {$ipaddr}</span>
+                    class="col-lg-9">: {$ipaddr|escape:'htmlall':'UTF-8'}</span>
         </div>
         <div class="row">
             <label class="col-lg-3">{l s='Callback url' mod='hipay_enterprise'}</label><span
-                    class="col-lg-9">: {$this_callback}</span>
+                    class="col-lg-9">: {$this_callback|escape:'htmlall':'UTF-8'}</span>
         </div>
 
     </div>
@@ -74,7 +74,7 @@
         {if !empty($technicalErrors)}
             <div class="row">
                 <div class="alert alert-danger">
-                    {$technicalErrors}
+                    {$technicalErrors|escape:'htmlall':'UTF-8'}
                 </div>
             </div>
         {/if}

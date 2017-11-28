@@ -10,7 +10,7 @@
  * @license   https://github.com/hipay/hipay-enterprise-sdk-prestashop/blob/master/LICENSE.md
  *}
 {include file="$hipay_enterprise_tpl_dir/front/partial/js.strings.tpl"}
-<form id="{$localPaymentName}-hipay" action="{$action}" enctype="application/x-www-form-urlencoded"
+<form id="{$localPaymentName|escape:'html':'UTF-8'}-hipay" action="{$action|escape:'html':'UTF-8'}" enctype="application/x-www-form-urlencoded"
       class="form-horizontal hipay-form-17" method="post" name="local"
       autocomplete="off">
     {assign "psVersion" "17"}
@@ -19,15 +19,15 @@
 </form>
 
 <script>
-    document.addEventListener('DOMContentLoaded', formListener{$localPaymentName|regex_replace:'/[^a-zA-Z0-9]/':""}, false);
+    document.addEventListener('DOMContentLoaded', formListener{$localPaymentName|regex_replace:'/[^a-zA-Z0-9]/'|escape:'html':'UTF-8':""}, false);
 
     function formListener{$localPaymentName|regex_replace:'/[^a-zA-Z0-9]/':""}() {
-        $("#{$localPaymentName}-hipay").submit(function (e) {
+        $("#{$localPaymentName|escape:'html':'UTF-8'}-hipay").submit(function (e) {
             // prevent form from being submitted 
             e.preventDefault();
             e.stopPropagation();
 
-            if (hiPayInputControl.checkControl('{$localPaymentName}')) {
+            if (hiPayInputControl.checkControl('{$localPaymentName|escape:'html':'UTF-8'}')) {
                 this.submit();
             }
 

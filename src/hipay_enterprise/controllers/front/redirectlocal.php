@@ -78,6 +78,7 @@ class Hipay_enterpriseRedirectlocalModuleFrontController extends ModuleFrontCont
                 'currencies' => $this->module->getCurrency((int)$cart->id_currency),
                 'total' => $cart->getOrderTotal(true, Cart::BOTH),
                 'this_path' => $this->module->getPathUri(),
+                'language' => $context->language->iso_code,
                 'this_path_bw' => $this->module->getPathUri(),
                 'this_path_ssl' => Tools::getShopDomainSsl(true, true) .
                     __PS_BASE_URI__ .

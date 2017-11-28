@@ -33,39 +33,39 @@
                             {foreach $psCarriers as $car}
                                 <tr>
                                     <td>
-                                        <input type="hidden" value="{$car["id_carrier"]}"
-                                               name="ps_map_{$car["id_carrier"]}"/>
-                                        {$car["name"]}
+                                        <input type="hidden" value="{$car["id_carrier"]|escape:'htmlall':'UTF-8'}"
+                                               name="ps_map_{$car["id_carrier"]|escape:'htmlall':'UTF-8'}"/>
+                                        {$car["name"]|escape:'htmlall':'UTF-8'}
                                     </td>
                                     <td>
                                         <input type="text" class="day-type"
-                                               value="{if isset($mappedCarriers[$car["id_carrier"]])}{$mappedCarriers[$car["id_carrier"]]["preparation_eta"]}{/if}"
-                                               name="ps_map_prep_eta_{$car["id_carrier"]}"/>
+                                               value="{if isset($mappedCarriers[$car["id_carrier"]])}{$mappedCarriers[$car["id_carrier"]]["preparation_eta"]|escape:'htmlall':'UTF-8'}{/if}"
+                                               name="ps_map_prep_eta_{$car["id_carrier"]|escape:'htmlall':'UTF-8'}"/>
                                     </td>
                                     <td>
                                         <input type="text" class="day-type"
-                                               value="{if isset($mappedCarriers[$car["id_carrier"]])}{$mappedCarriers[$car["id_carrier"]]["delivery_eta"]}{/if}"
-                                               name="ps_map__delivery_eta_{$car["id_carrier"]}"/>
+                                               value="{if isset($mappedCarriers[$car["id_carrier"]])}{$mappedCarriers[$car["id_carrier"]]["delivery_eta"]|escape:'htmlall':'UTF-8'}{/if}"
+                                               name="ps_map__delivery_eta_{$car["id_carrier"]|escape:'htmlall':'UTF-8'}"/>
                                     </td>
                                     <td>
-                                        <select name="hipay_map_mode_{$car["id_carrier"]}">
+                                        <select name="hipay_map_mode_{$car["id_carrier"]|escape:'htmlall':'UTF-8'}">
                                             {if !isset($mappedCarriers[$car["id_carrier"]])}
                                                 <option value="">{l s='- Select carrier mode -' mod='hipay_enterprise'}</option>
                                             {/if}
                                             {foreach $hipayCarriers["mode"] as $hpcarmode}
                                                 <option {if isset($mappedCarriers[$car["id_carrier"]]) && $mappedCarriers[$car["id_carrier"]]["mode"] eq  $hpcarmode->getCode()} selected {/if}
-                                                        value="{$hpcarmode->getCode()}">{$hpcarmode->getDisplayName($lang|upper)} </option>
+                                                        value="{$hpcarmode->getCode()|escape:'htmlall':'UTF-8'}">{$hpcarmode->getDisplayName($lang|upper)|escape:'htmlall':'UTF-8'} </option>
                                             {/foreach}
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="hipay_map_shipping_{$car["id_carrier"]}">
+                                        <select name="hipay_map_shipping_{$car["id_carrier"]|escape:'htmlall':'UTF-8'}">
                                             {if !isset($mappedCarriers[$car["id_carrier"]])}
                                                 <option value="">{l s='- Select carrier shipping -' mod='hipay_enterprise'}</option>
                                             {/if}
                                             {foreach $hipayCarriers["shipping"] as $hpcarmode}
                                                 <option {if isset($mappedCarriers[$car["id_carrier"]]) && $mappedCarriers[$car["id_carrier"]]["shipping"] eq  $hpcarmode->getCode()} selected {/if}
-                                                        value="{$hpcarmode->getCode()}">{$hpcarmode->getDisplayName($lang|upper)} </option>
+                                                        value="{$hpcarmode->getCode()|escape:'htmlall':'UTF-8'}">{$hpcarmode->getDisplayName($lang|upper)|escape:'htmlall':'UTF-8'} </option>
                                             {/foreach}
                                         </select>
                                     </td>

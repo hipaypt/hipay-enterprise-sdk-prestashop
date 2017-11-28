@@ -17,10 +17,10 @@
                 {l s='Hipay actions' mod='hipay_enterprise'}
             </div>
             {if $errorHipay }
-                <p class="alert alert-danger">{$errorHipay}</p>
+                <p class="alert alert-danger">{$errorHipay|escape:'html':'UTF-8'}</p>
             {/if}
             {if $messagesHipay }
-                <p class="alert alert-success">{$messagesHipay}</p>
+                <p class="alert alert-success">{$messagesHipay|escape:'html':'UTF-8'}</p>
             {/if}
             <div class="well hidden-print row">
                 {if $showMoto}

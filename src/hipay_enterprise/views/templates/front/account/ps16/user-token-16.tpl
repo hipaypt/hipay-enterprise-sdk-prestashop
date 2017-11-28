@@ -13,7 +13,7 @@
     <a href="{$link->getPageLink('my-account', true)|escape:'html':'UTF-8'}">
         {l s='My account' mod='hipay_enterprise'}
     </a>
-    <span class="navigation-pipe">{$navigationPipe}</span>
+    <span class="navigation-pipe">{$navigationPipe|escape:'html':'UTF-8'}</span>
     <span class="navigation_page">{l s='Order history'  mod='hipay_enterprise'}</span>
 {/capture}
 {include file="$tpl_dir./errors.tpl"}
@@ -35,14 +35,14 @@
 
         {foreach $savedCC as $cc}
             <tr>
-                <td><img src="{$this_path_ssl}/views/img/{$cc.brand|lower}_small.png"/> {$cc.pan}</td>
-                <td>{$cc.card_holder}</td>
-                <td>{"%02d"|sprintf:$cc.card_expiry_month} / {$cc.card_expiry_year}</td>
+                <td><img src="{$this_path_ssl|escape:'html':'UTF-8'}/views/img/{$cc.brand|lower|escape:'html':'UTF-8'}_small.png"/> {$cc.pan|escape:'html':'UTF-8'}</td>
+                <td>{$cc.card_holder|escape:'html':'UTF-8'}</td>
+                <td>{"%02d"|sprintf:$cc.card_expiry_month|escape:'html':'UTF-8'} / {$cc.card_expiry_year|escape:'html':'UTF-8'}</td>
                 <td class="text-xs-center">
                     <form class="delTokenForm" enctype="application/x-www-form-urlencoded"
                           action="{$link->getModuleLink('hipay_enterprise', 'userToken', [], true)|escape:'html'}"
                           method="post">
-                        <input type="hidden" name="hipayCCTokenId" value="{$cc.hp_id}"/>
+                        <input type="hidden" name="hipayCCTokenId" value="{$cc.hp_id|escape:'html':'UTF-8'}"/>
                         <button type="submit" name="submitDelToken" class="btn btn-danger">
                             <i class="icon-remove"></i>
                             {l s='Delete' mod='hipay_enterprise'}
@@ -67,7 +67,7 @@
         </a>
     </li>
     <li>
-        <a class="btn btn-default button button-small" href="{$base_dir}">
+        <a class="btn btn-default button button-small" href="{$base_dir|escape:'html':'UTF-8'}">
             <span><i class="icon-chevron-left"></i> {l s='Home' mod='hipay_enterprise'}</span>
         </a>
     </li>

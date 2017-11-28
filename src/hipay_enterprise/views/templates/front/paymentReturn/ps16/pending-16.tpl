@@ -17,6 +17,6 @@
 
 <p>{l s='Your order is awaiting confirmation from the bank.' mod='hipay_enterprise'}
     <br/><br/>{l s='Once it is approved it will be available in your' mod='hipay_enterprise'} <strong><a
-                href="{$link->getPageLink('history', true)}">{l s='order history' mod='hipay_enterprise'}</a></strong>
+                href="{$link->getPageLink('history', true)|escape:'html':'UTF-8'}">{l s='order history' mod='hipay_enterprise'}</a></strong>
 </p>
 <p><a href="index.php">{l s='Back to home' mod='hipay_enterprise'}</a></p>

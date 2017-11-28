@@ -234,7 +234,7 @@ class HipayDBQuery
         $sql = 'INSERT IGNORE INTO `' . _DB_PREFIX_ . 'module_currency` (`id_module`, `id_shop`, `id_currency`)
                     SELECT ' . (int)$moduleId . ', "' . (int)$shopId . '", `id_currency`
                     FROM `' . _DB_PREFIX_ . 'currency`
-                    WHERE `deleted` = \'0\' AND `iso_code` = \'' . $iso . '\'';
+                    WHERE `deleted` = \'0\' AND `iso_code` = \'' . pSQL($iso) . '\'';
         return (bool)Db::getInstance()->execute($sql);
     }
 
@@ -247,7 +247,7 @@ class HipayDBQuery
     {
         $sql = 'SELECT `id_cart`
                 FROM `' . _DB_PREFIX_ . 'cart`
-                WHERE `id_customer` = ' . pSQL($userId) . '
+                WHERE `id_customer` = ' . (int)$userId . '
                 ORDER BY date_upd DESC';
 
         $result = Db::getInstance()->getRow($sql);
@@ -294,8 +294,8 @@ class HipayDBQuery
     }
 
     /**
-     *
-     * @param type $cartId
+     * @param $cartId
+     * @return bool
      */
     public function getOrderByCartId($cartId)
     {
@@ -352,10 +352,14 @@ class HipayDBQuery
 
     /**
      * insert row in HIPAY_CAT_MAPPING_TABLE
-     * @param type $values
+     *
+     * @param $values
+     * @param $shopId
+     * @return bool
      */
     public function setHipayCatMapping($values, $shopId)
     {
+
         try {
             Db::getInstance()->insert(HipayDBQuery::HIPAY_CAT_MAPPING_TABLE, $values);
         } catch (Exception $exc) {
@@ -370,10 +374,14 @@ class HipayDBQuery
 
     /**
      * insert row in HIPAY_CARRIER_MAPPING_TABLE
-     * @param type $values
+     *
+     * @param $values
+     * @param $shopId
+     * @return bool
      */
     public function setHipayCarrierMapping($values, $shopId)
     {
+
         try {
             Db::getInstance()->insert(HipayDBQuery::HIPAY_CARRIER_MAPPING_TABLE, $values);
         } catch (Exception $exc) {
@@ -537,8 +545,8 @@ class HipayDBQuery
     public function getTransactionReference($orderId)
     {
         $sql = 'SELECT * FROM `' . _DB_PREFIX_ . HipayDBQuery::HIPAY_TRANSACTION_TABLE .
-            '` WHERE order_id=' . pSQL((int)$orderId) . ' AND ( status =' . TransactionStatus::AUTHORIZED . ' 
-                OR status =' . TransactionStatus::AUTHORIZED_AND_PENDING . ') LIMIT 1 ;';
+            '` WHERE order_id=' . pSQL((int)$orderId) . ' AND ( status =' . (int)TransactionStatus::AUTHORIZED . ' 
+                OR status =' . (int)TransactionStatus::AUTHORIZED_AND_PENDING . ') LIMIT 1 ;';
 
         $result = Db::getInstance()->executeS($sql);
         if (!empty($result)) {
@@ -555,7 +563,7 @@ class HipayDBQuery
     public function getPaymentProductFromMessage($orderId)
     {
         $sql = 'SELECT * FROM `' . _DB_PREFIX_ . HipayDBQuery::HIPAY_TRANSACTION_TABLE .
-            '` WHERE order_id=' . pSQL((int)$orderId) . ' AND status =' . TransactionStatus::AUTHORIZED . ' LIMIT 1;';
+            '` WHERE order_id=' . pSQL((int)$orderId) . ' AND status =' . (int)TransactionStatus::AUTHORIZED . ' LIMIT 1;';
 
         $result = Db::getInstance()->executeS($sql);
         if (!empty($result)) {
@@ -572,7 +580,7 @@ class HipayDBQuery
     public function getOrderBasket($orderId)
     {
         $sql = 'SELECT * FROM `' . _DB_PREFIX_ . HipayDBQuery::HIPAY_TRANSACTION_TABLE .
-            '` WHERE order_id=' . pSQL((int)$orderId) . ' AND status =' . TransactionStatus::AUTHORIZED . ' LIMIT 1;';
+            '` WHERE order_id=' . pSQL((int)$orderId) . ' AND status =' . (int)TransactionStatus::AUTHORIZED . ' LIMIT 1;';
 
         $result = Db::getInstance()->executeS($sql);
         if (!empty($result)) {
@@ -701,8 +709,8 @@ class HipayDBQuery
     }
 
     /**
-     *
-     * @param type $orderId
+     * @param $orderId
+     * @return bool
      */
     public function feesAreCaptured($orderId)
     {
@@ -710,8 +718,8 @@ class HipayDBQuery
     }
 
     /**
-     *
-     * @param type $orderId
+     * @param $orderId
+     * @return bool
      */
     public function feesAreRefunded($orderId)
     {
@@ -719,8 +727,8 @@ class HipayDBQuery
     }
 
     /**
-     *
-     * @param type $orderId
+     * @param $orderId
+     * @return bool
      */
     public function discountsAreCaptured($orderId)
     {
@@ -728,8 +736,8 @@ class HipayDBQuery
     }
 
     /**
-     *
-     * @param type $orderId
+     * @param $orderId
+     * @return bool
      */
     public function discountsAreRefunded($orderId)
     {
@@ -737,10 +745,10 @@ class HipayDBQuery
     }
 
     /**
-     *
-     * @param type $orderId
-     * @param type $operation
-     * @return boolean
+     * @param $orderId
+     * @param $type
+     * @param $operation
+     * @return bool
      */
     private function feesOrDiscountAreMaintained($orderId, $type, $operation)
     {
@@ -752,9 +760,9 @@ class HipayDBQuery
                 WHERE `hp_ps_order_id` = ' .
             pSQL((int)$orderId) .
             ' AND `operation` = "' .
-            $operation .
+            pSQL($operation) .
             '" AND `type` = "' .
-            $type .
+            pSQL($type) .
             '"';
         $result = Db::getInstance()->executeS($sql);
 
@@ -899,8 +907,8 @@ class HipayDBQuery
     }
 
     /**
-     *
-     * @param type $orderId
+     * @param $orderId
+     * @return bool
      */
     public function isManualCapture($orderId)
     {

@@ -26,5 +26,5 @@
         {l s='We noticed a problem with your order. Please contact our ' mod='hipay_enterprise'}
         <strong><a href="{$link->getPageLink('contact', true)|escape:'html'}">{l s='customer support' mod='hipay_enterprise'}</a></strong>.
     </p>
-    <p><a href="{$link->getPageLink('order', true)}">{l s='Back to cart' mod='hipay_enterprise'}</a></p>
+    <p><a href="{$link->getPageLink('order', true)|escape:'html':'UTF-8'}">{l s='Back to cart' mod='hipay_enterprise'}</a></p>
 {/block}
