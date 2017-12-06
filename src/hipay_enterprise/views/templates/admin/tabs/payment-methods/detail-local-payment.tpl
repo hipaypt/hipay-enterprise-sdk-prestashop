@@ -40,9 +40,39 @@
             <div class="row">
                 <div class="form-group">
                     <label class="control-label col-lg-2">{l s='Display name' mod='hipay_enterprise'}</label>
-                    <div class="col-lg-3">
-                        <input type="text" name="{$key|escape:'htmlall':'UTF-8'}_displayName" value="{$method.displayName|escape:'htmlall':'UTF-8'}"/>
-                    </div>
+
+                    {foreach from=$languages item=language key=id}
+                        <div class="col-lg-3 {if $languages|count > 1} translatable-field lang-{$language.iso_code|escape:'htmlall':'UTF-8'} {/if}" {if $id > 0}style="display: none" {/if}>
+
+                            <input type="text" name="{$key|escape:'htmlall':'UTF-8'}_displayName[{$language.iso_code|escape:'htmlall':'UTF-8'}]"
+                                   class="translatable-field lang-{$language.iso_code|escape:'htmlall':'UTF-8'}"
+                                    {if isset($method.displayName[$language.iso_code])}
+                                        value="{$method.displayName[$language.iso_code]|escape:'htmlall':'UTF-8'}"
+                                    {elseif isset($method.displayName) && !is_array($method.displayName)}
+                                        value="{$method.displayName|escape:'htmlall':'UTF-8'}"
+                                    {else}
+                                        value="{$method.displayName['en']|escape:'htmlall':'UTF-8'}"
+                                    {/if}
+                            />
+                        </div>
+                        {if $languages|count > 1}
+                            <div class="col-lg-2 translatable-field lang-{$language.iso_code|escape:'htmlall':'UTF-8'} " {if $id > 0}style="display: none" {/if}>
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                        tabindex="-1">
+                                    {$language.iso_code|escape:'htmlall':'UTF-8'}
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    {foreach from=$languages item=language}
+                                        <li>
+                                            <a href="javascript:selectLanguageHipay('{$language.iso_code|escape:'htmlall':'UTF-8'}');">{$language.name|escape:'htmlall':'UTF-8'}</a>
+                                        </li>
+                                    {/foreach}
+                                </ul>
+                            </div>
+                        {/if}
+                    {/foreach}
+
                 </div>
             </div>
         {/if}

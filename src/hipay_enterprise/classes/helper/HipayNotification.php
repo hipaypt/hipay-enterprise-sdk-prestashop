@@ -186,10 +186,9 @@ class HipayNotification
 
 
             $this->db->releaseSQLLock("# ProcessTransaction for cart ID : " . $this->cart->id);
-            // END SQL LOCK
-            //#################################################################
         } catch (Exception $ex) {
             $this->db->releaseSQLLock("Exception # ProcessTransaction for cart ID : " . $this->cart->id);
+            $this->logs->logException($ex);
         }
     }
 
@@ -301,7 +300,7 @@ class HipayNotification
         }
         $paymentProduct = $this->transaction->getPaymentProduct();
 
-        return HipayHelper::getPaymentProductName($cardBrand, $paymentProduct, $this->module);
+        return HipayHelper::getPaymentProductName($cardBrand, $paymentProduct, $this->module, $this->context->language );
     }
 
     /**
