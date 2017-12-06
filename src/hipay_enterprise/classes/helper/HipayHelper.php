@@ -37,7 +37,7 @@ class HipayHelper
         if (!$cardBrand) {
             if ($paymentProduct && $paymentProduct == 'credit_card') {
                 $paymentProduct = $module->hipayConfigTool->getPaymentGlobal()["ccDisplayName"];
-            } else if ($paymentProduct && isset($module->hipayConfigTool->getLocalPayment()[$paymentProduct])) {
+            } elseif ($paymentProduct && isset($module->hipayConfigTool->getLocalPayment()[$paymentProduct])) {
                 $config = $paymentProduct = $module->hipayConfigTool->getLocalPayment()[$paymentProduct];
                 if (is_array($config["displayName"])) {
                     $paymentProduct = $config["displayName"][$language];
@@ -126,7 +126,7 @@ class HipayHelper
     public static function getProductRef($product)
     {
         if (!empty($product["reference"])) {
-            if (isset($product["attributes_small"])) {
+            if (Tools::getIsset($product["attributes_small"])) {
                 // Product with declinaison
                 $reference = $product["reference"] . "-" . HipayHelper::slugify($product["attributes_small"]);
             } else {
@@ -139,7 +139,7 @@ class HipayHelper
                 $product["id_product_attribute"] .
                 "-" .
                 HipayHelper::slugify($product["name"]);
-            if (isset($product["attributes_small"])) {
+            if (Tools::getIsset($product["attributes_small"])) {
                 $reference .= "-" . HipayHelper::slugify($product["attributes_small"]);
             }
         }
@@ -312,6 +312,8 @@ class HipayHelper
      * @param $country
      * @param $currency
      * @param int $orderTotal
+     * @param null $address
+     * @param null $customer
      * @return array
      */
     public static function getSortedActivatedPaymentByCountryAndCurrency(
@@ -320,8 +322,8 @@ class HipayHelper
         $country,
         $currency,
         $orderTotal = 1,
-        $address,
-        $customer
+        $address = null,
+        $customer = null
     ) {
         $activatedCreditCard = array();
         $activatedCreditCard["credit_card"]["frontPosition"] = $configHipay["payment"]["global"]["ccFrontPosition"];
@@ -398,7 +400,9 @@ class HipayHelper
                             'views/img/' .
                             $settings["logo"];
 
-                        $checkoutFieldsMandatory = isset($module->hipayConfigTool->getLocalPayment()[$name]["checkoutFieldsMandatory"]) ?
+                        $checkoutFieldsMandatory = isset(
+                            $module->hipayConfigTool->getLocalPayment()[$name]["checkoutFieldsMandatory"]
+                        ) ?
                             $module->hipayConfigTool->getLocalPayment()[$name]["checkoutFieldsMandatory"] : "";
                         $fieldMandatory = array();
                         if (!empty($checkoutFieldsMandatory)) {
@@ -406,14 +410,18 @@ class HipayHelper
                                 switch ($field) {
                                     case "phone":
                                         if (empty($address->{$field})) {
-                                            $fieldMandatory[] = $module->l('Please enter your phone number to use this payment method.');
-                                        } else if (!preg_match('"(0|\\+33|0033)[1-9][0-9]{8}"',$address->{$field})) {
+                                            $fieldMandatory[] = $module->l(
+                                                'Please enter your phone number to use this payment method.'
+                                            );
+                                        } elseif (!preg_match('"(0|\\+33|0033)[1-9][0-9]{8}"', $address->{$field})) {
                                             $fieldMandatory[] = $module->l('Please check the phone number entered.');
                                         }
                                         break;
                                     case "gender":
                                         if (empty($customer->id_gender)) {
-                                            $fieldMandatory[] = $module->l('Please inform your civility to use this method of payment.');
+                                            $fieldMandatory[] = $module->l(
+                                                'Please inform your civility to use this method of payment.'
+                                            );
                                         }
                                         break;
                                     default:
@@ -422,9 +430,8 @@ class HipayHelper
                                 }
                             }
 
-                            $activatedPayment[$name]['errorMsg'] =  $fieldMandatory;
+                            $activatedPayment[$name]['errorMsg'] = $fieldMandatory;
                         }
-
                     }
                 } else {
                     $activatedPayment[$name] = $settings;
@@ -551,7 +558,9 @@ class HipayHelper
     public static function orderExists($cart_id)
     {
         if ($cart_id) {
-            $result = (bool)Db::getInstance()->getValue('SELECT count(*) FROM `'._DB_PREFIX_.'orders` WHERE `id_cart` = '.(int)$cart_id);
+            $result = (bool)Db::getInstance()->getValue(
+                'SELECT count(*) FROM `' . _DB_PREFIX_ . 'orders` WHERE `id_cart` = ' . (int)$cart_id
+            );
             return $result;
         }
         return false;
@@ -568,13 +577,14 @@ class HipayHelper
      */
     public static function getValue($key, $default_value = false)
     {
-        if (!isset($key) || empty($key) || !is_string($key)) {
+        if (!Tools::getIsset($key) || empty($key) || !is_string($key)) {
             return false;
         }
 
-        $ret = (isset($_POST[$key]) ? $_POST[$key] : (isset($_GET[$key]) ? $_GET[$key] : $default_value));
+        $ret = (Tools::getIsset($_POST[$key]) ? $_POST[$key] : (Tools::getIsset(
+            $_GET[$key]
+        ) ? $_GET[$key] : $default_value));
 
         return $ret;
     }
-
 }

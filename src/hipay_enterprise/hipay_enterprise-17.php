@@ -183,14 +183,9 @@ class HipayEnterpriseNew extends Hipay_enterprise
             'module:' . $this->name . '/views/templates/front/payment/ps17/paymentLocalForm-17.tpl'
         );
 
-        if (isset(
-            $paymentProduct["displayName"][$this->context->language->iso_code])
-        ) {
+        if (isset($paymentProduct["displayName"][$this->context->language->iso_code])) {
             $displayName = $paymentProduct["displayName"][$this->context->language->iso_code];
-        } else if (
-            isset($paymentProduct["displayName"])
-            && !is_array($paymentProduct["displayName"])
-        ) {
+        } elseif (isset($paymentProduct["displayName"]) && !is_array($paymentProduct["displayName"])) {
             $displayName = $paymentProduct["displayName"];
         } else {
             $displayName = $paymentProduct["displayName"]['en'];
@@ -221,14 +216,9 @@ class HipayEnterpriseNew extends Hipay_enterprise
     private function setCCPaymentOptions(&$paymentOptions, $paymentProduct, $params)
     {
         if (!empty($paymentProduct["products"])) {
-            if (isset(
-                $this->hipayConfigTool->getPaymentGlobal()["ccDisplayName"][$this->context->language->iso_code])
-            ) {
+            if (isset($this->hipayConfigTool->getPaymentGlobal()["ccDisplayName"][$this->context->language->iso_code])) {
                 $displayName = $this->hipayConfigTool->getPaymentGlobal()["ccDisplayName"][$this->context->language->iso_code];
-            } else if (
-                isset($this->hipayConfigTool->getPaymentGlobal()["ccDisplayName"])
-                && !is_array($this->hipayConfigTool->getPaymentGlobal()["ccDisplayName"])
-            ) {
+            } elseif (isset($this->hipayConfigTool->getPaymentGlobal()["ccDisplayName"]) && !is_array($this->hipayConfigTool->getPaymentGlobal()["ccDisplayName"])) {
                 $displayName = $this->hipayConfigTool->getPaymentGlobal()["ccDisplayName"];
             } else {
                 $displayName = $this->hipayConfigTool->getPaymentGlobal()["ccDisplayName"]['en'];

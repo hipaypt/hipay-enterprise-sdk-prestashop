@@ -81,7 +81,10 @@ class DeliveryShippingInfoFormatter extends apiFormatterAbstract
     {
         if ($this->mappedShipping != null) {
             return json_encode(
-                array('mode' => $this->mappedShipping["hp_carrier_mode"], 'shipping' => $this->mappedShipping["hp_carrier_shipping"])
+                array(
+                    'mode' => $this->mappedShipping["hp_carrier_mode"],
+                    'shipping' => $this->mappedShipping["hp_carrier_shipping"]
+                )
             );
         }
         return null;

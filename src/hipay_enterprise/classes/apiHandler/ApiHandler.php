@@ -49,8 +49,7 @@ class Apihandler
     }
 
     /**
-     *
-     * @param type $cart
+     * @param $cart
      */
     public function handleMoto($cart)
     {
@@ -77,8 +76,10 @@ class Apihandler
 
     /**
      * handle credit card api call
-     * @param type $mode
-     * @param type $params
+     *
+     * @param string $mode
+     * @param array $params
+     * @return string
      */
     public function handleCreditCard($mode = Apihandler::HOSTEDPAGE, $params = array())
     {
@@ -120,9 +121,9 @@ class Apihandler
 
     /**
      * handle all local payment api call
-     * @param type $mode
-     * @param type $params
-     * @return type
+     *
+     * @param string $mode
+     * @param array $params
      */
     public function handleLocalPayment($mode = Apihandler::HOSTEDPAGE, $params = array())
     {
@@ -132,7 +133,7 @@ class Apihandler
         $params ["paymentmethod"] = $this->getPaymentMethod($params, false);
 
         $configMethod = $this->module->hipayConfigTool->getLocalPayment()[$params['method']];
-        if (key_exists("acceptHostedOrder",$configMethod) && $configMethod["acceptHostedOrder"]) {
+        if (key_exists("acceptHostedOrder", $configMethod) && $configMethod["acceptHostedOrder"]) {
             $this->handleHostedPayment($params);
         } else {
             $this->handleDirectOrder($params);
@@ -140,8 +141,8 @@ class Apihandler
     }
 
     /**
-     *
-     * @param type $params
+     * @param $params
+     * @return bool
      */
     public function handleCapture($params)
     {
@@ -149,8 +150,8 @@ class Apihandler
     }
 
     /**
-     *
-     * @param type $params
+     * @param $params
+     * @return bool
      */
     public function handleRefund($params)
     {
@@ -160,7 +161,8 @@ class Apihandler
     /**
      * Accept any challenge
      *
-     * @param type $params
+     * @param $params
+     * @return bool
      */
     public function handleAcceptChallenge($params)
     {
@@ -170,7 +172,8 @@ class Apihandler
     /**
      * Accept any challenge
      *
-     * @param type $params
+     * @param $params
+     * @return bool
      */
     public function handleDenyChallenge($params)
     {
@@ -178,9 +181,9 @@ class Apihandler
     }
 
     /**
-     *
-     * @param type $mode
-     * @param type $params
+     * @param $mode
+     * @param array $params
+     * @return bool
      */
     private function handleMaintenance($mode, $params = array())
     {
@@ -215,8 +218,10 @@ class Apihandler
 
     /**
      * Init params send to the api caller
-     * @param type $params
-     * @param type $creditCard
+     *
+     * @param $params
+     * @param bool $creditCard
+     * @param bool $cart
      */
     private function baseParamsInit(&$params, $creditCard = true, $cart = false)
     {
@@ -242,7 +247,9 @@ class Apihandler
 
     /**
      * return mapped cart
-     * @return type
+     *
+     * @param bool $cart
+     * @return json
      */
     private function getCart($cart = false)
     {
@@ -253,7 +260,9 @@ class Apihandler
 
     /**
      * return mapped delivery informations
-     * @return type
+     *
+     * @param bool $cart
+     * @return \HiPay\Fullservice\Gateway\Request\Info\DeliveryShippingInfoRequest
      */
     private function getDeliveryInformation($cart = false)
     {
@@ -264,6 +273,11 @@ class Apihandler
 
     /**
      * call Api to get forwarding URL
+     *
+     * @param $params
+     * @param bool $cart
+     * @param bool $moto
+     * @throws GatewayException
      */
     private function handleHostedPayment($params, $cart = false, $moto = false)
     {
@@ -273,7 +287,9 @@ class Apihandler
     /**
      * Return  iframe URL
      *
+     * @param $params
      * @return string
+     * @throws GatewayException
      */
     private function handleIframe($params)
     {
@@ -282,6 +298,10 @@ class Apihandler
 
     /**
      * call api and redirect to success or error page
+     *
+     * @param $params
+     * @param bool $cc
+     * @throws GatewayException
      */
     private function handleDirectOrder($params, $cc = false)
     {
@@ -333,9 +353,10 @@ class Apihandler
 
     /**
      * return mapped payment method
-     * @param type $params
-     * @param type $creditCard
-     * @return mixte
+     *
+     * @param $params
+     * @param bool $creditCard
+     * @return \HiPay\Fullservice\Gateway\Request\PaymentMethod\CardTokenPaymentMethod|mixed
      */
     private function getPaymentMethod($params, $creditCard = true)
     {
@@ -348,6 +369,9 @@ class Apihandler
         return $paymentMethod->generate();
     }
 
+    /**
+     * @param $params
+     */
     private function callValidateOrder($params)
     {
         // SQL LOCK

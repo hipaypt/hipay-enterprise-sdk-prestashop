@@ -145,8 +145,11 @@ class HipayForm extends HipayFormInput
         // init field
         $values = array(
             "input_split" => $this->generateHtmlNoticeAdmin(
-                $this->module->l('When a transaction is likely to be a fraud then an email is sent to the contact email from your shop as well as to an additional sender. Here you can configure the additional recipient email',
-                    'HipayForm')
+                $this->module->l(
+                    'When a transaction is likely to be a fraud then an email is sent to the contact email from your' .
+                    ' shop as well as to an additional sender. Here you can configure the additional recipient email',
+                    'HipayForm'
+                )
             ),
             "payment_fraud_email_sender" => "",
             "send_payment_fraud_email_copy_to" => "",

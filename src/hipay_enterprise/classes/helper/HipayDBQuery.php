@@ -266,9 +266,9 @@ class HipayDBQuery
      * start sql transaction
      * @param int $cartId
      */
-    public function setSQLLockForCart($cartId,$origin)
+    public function setSQLLockForCart($cartId, $origin)
     {
-        $this->logs->logInfos('# Start LockSQL  for id_cart = ' . $cartId . 'in :' . $origin );
+        $this->logs->logInfos('# Start LockSQL  for id_cart = ' . $cartId . 'in :' . $origin);
 
         $sql = 'begin;';
         $sql .= 'SELECT id_cart FROM ' . _DB_PREFIX_ . 'cart WHERE id_cart = ' . pSQL((int)$cartId) . ' FOR UPDATE;';
@@ -277,7 +277,7 @@ class HipayDBQuery
             $this->logs->logInfos('Bad LockSQL initiated, Lock could not be initiated for id_cart = ' . $cartId);
             die('Lock not initiated');
         }
-        $this->logs->logInfos('# LockSQL for id_cart = ' . $cartId . 'in :' . $origin . ' is now free' );
+        $this->logs->logInfos('# LockSQL for id_cart = ' . $cartId . 'in :' . $origin . ' is now free');
     }
 
     /**
@@ -563,7 +563,9 @@ class HipayDBQuery
     public function getPaymentProductFromMessage($orderId)
     {
         $sql = 'SELECT * FROM `' . _DB_PREFIX_ . HipayDBQuery::HIPAY_TRANSACTION_TABLE .
-            '` WHERE order_id=' . pSQL((int)$orderId) . ' AND status =' . (int)TransactionStatus::AUTHORIZED . ' LIMIT 1;';
+            '` WHERE order_id=' . pSQL(
+                (int)$orderId
+            ) . ' AND status =' . (int)TransactionStatus::AUTHORIZED . ' LIMIT 1;';
 
         $result = Db::getInstance()->executeS($sql);
         if (!empty($result)) {
@@ -580,7 +582,9 @@ class HipayDBQuery
     public function getOrderBasket($orderId)
     {
         $sql = 'SELECT * FROM `' . _DB_PREFIX_ . HipayDBQuery::HIPAY_TRANSACTION_TABLE .
-            '` WHERE order_id=' . pSQL((int)$orderId) . ' AND status =' . (int)TransactionStatus::AUTHORIZED . ' LIMIT 1;';
+            '` WHERE order_id=' . pSQL(
+                (int)$orderId
+            ) . ' AND status =' . (int)TransactionStatus::AUTHORIZED . ' LIMIT 1;';
 
         $result = Db::getInstance()->executeS($sql);
         if (!empty($result)) {

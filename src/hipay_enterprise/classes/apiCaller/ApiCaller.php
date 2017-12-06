@@ -175,7 +175,11 @@ class ApiCaller
             )["api_password_production"];
         }
 
-        $env = ($sandbox) ? HiPay\Fullservice\HTTP\Configuration\Configuration::API_ENV_STAGE : HiPay\Fullservice\HTTP\Configuration\Configuration::API_ENV_PRODUCTION;
+        if (($sandbox)) {
+            $env = HiPay\Fullservice\HTTP\Configuration\Configuration::API_ENV_STAGE;
+        } else {
+            $env = HiPay\Fullservice\HTTP\Configuration\Configuration::API_ENV_PRODUCTION;
+        }
 
         $config = new \HiPay\Fullservice\HTTP\Configuration\Configuration($username, $password, $env);
 

@@ -51,7 +51,7 @@ abstract class ApiFormatterAbstract implements ApiFormatterInterface
      */
     protected function getGender($idGender = null)
     {
-          switch ($idGender) {
+        switch ($idGender) {
             case '1':
                 $gender = Gender::MALE;
                 break;

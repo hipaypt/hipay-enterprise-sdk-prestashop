@@ -94,7 +94,7 @@ class HipayNotification
     public function processTransaction()
     {
         try {
-            $this->db->setSQLLockForCart($this->cart->id ,"# ProcessTransaction for cart ID : " . $this->cart->id);
+            $this->db->setSQLLockForCart($this->cart->id, "# ProcessTransaction for cart ID : " . $this->cart->id);
             $this->log->logInfos(
                 "# ProcessTransaction for cart ID : " .
                 $this->cart->id .
@@ -203,12 +203,13 @@ class HipayNotification
         if (HipayHelper::orderExists($this->cart->id)) {
             $this->addOrderMessage();
             if ((int)$this->order->getCurrentState() != (int)$newState &&
-                (int) $this->order->getCurrentState() != _PS_OS_OUTOFSTOCK_PAID_ &&
+                (int)$this->order->getCurrentState() != _PS_OS_OUTOFSTOCK_PAID_ &&
                 !$this->controleIfStatushistoryExist(_PS_OS_PAYMENT_, $newState, true)
             ) {
                 // If order status is OUTOFSTOCK_UNPAID then new state will be OUTOFSTOCK_PAID
                 if (($this->controleIfStatushistoryExist(_PS_OS_OUTOFSTOCK_UNPAID_, $newState, true))
-                     && ($newState == _PS_OS_PAYMENT_ )) {
+                    && ($newState == _PS_OS_PAYMENT_)
+                ) {
                     $newState = _PS_OS_OUTOFSTOCK_PAID_;
                 }
                 $this->changeOrderStatus($newState);
@@ -241,7 +242,7 @@ class HipayNotification
     private function registerOrder($state)
     {
         if (!HipayHelper::orderExists($this->cart->id)) {
-            $this->log->logInfos('Register New order: ' .$this->cart->id);
+            $this->log->logInfos('Register New order: ' . $this->cart->id);
             $message = HipayOrderMessage::formatOrderData($this->module, $this->transaction);
 
             // init context
@@ -274,7 +275,10 @@ class HipayNotification
                 );
                 $this->order = new Order($this->module->currentOrder);
 
-                $captureType = array("order_id" => $this->order->id, "type" => $this->configHipay["payment"]["global"]["capture_mode"]);
+                $captureType = array(
+                    "order_id" => $this->order->id,
+                    "type" => $this->configHipay["payment"]["global"]["capture_mode"]
+                );
 
                 $this->db->setOrderCaptureType($captureType);
 
@@ -300,7 +304,7 @@ class HipayNotification
         }
         $paymentProduct = $this->transaction->getPaymentProduct();
 
-        return HipayHelper::getPaymentProductName($cardBrand, $paymentProduct, $this->module, $this->context->language );
+        return HipayHelper::getPaymentProductName($cardBrand, $paymentProduct, $this->module, $this->context->language);
     }
 
     /**

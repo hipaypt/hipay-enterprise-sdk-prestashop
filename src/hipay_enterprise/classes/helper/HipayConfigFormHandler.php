@@ -90,7 +90,7 @@ class HipayConfigFormHandler
                         "If sandbox api MO/TO username is filled sandbox api MO/TO password is mandatory"
                     );
                     return false;
-                } else if ($key == "api_secret_passphrase_sandbox" || $key == "api_moto_secret_passphrase_sandbox") {
+                } elseif ($key == "api_secret_passphrase_sandbox" || $key == "api_moto_secret_passphrase_sandbox") {
                     $fieldValue = HipayHelper::getValue($key);
                     $accountConfig["sandbox"][$key] = $fieldValue;
                 } else {
@@ -135,7 +135,7 @@ class HipayConfigFormHandler
                         "If production api MO/TO username is filled production api MO/TO password is mandatory"
                     );
                     return false;
-                } else if ($key == "api_secret_passphrase_production" || $key == "api_moto_secret_passphrase_production") {
+                } elseif ($key == "api_secret_passphrase_production" || $key == "api_moto_secret_passphrase_production") {
                     $fieldValue = HipayHelper::getValue($key);
                     $accountConfig["production"][$key] = $fieldValue;
                 } else {

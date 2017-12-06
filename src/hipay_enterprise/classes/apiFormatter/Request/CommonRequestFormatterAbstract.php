@@ -34,8 +34,10 @@ abstract class CommonRequestFormatterAbstract extends ApiFormatterAbstract
     }
 
     /**
-     * map prestashop order informations to request fields (shared information between Hpayment, Iframe, Direct Post and Maintenance )
-     * @param type $order
+     * map prestashop order informations to request fields
+     * (shared information between Hpayment, Iframe, Direct Post and Maintenance )
+     *
+     * @param $request
      */
     protected function mapRequest(&$request)
     {

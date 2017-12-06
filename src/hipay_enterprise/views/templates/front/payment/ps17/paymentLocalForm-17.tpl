@@ -19,7 +19,7 @@
         <div id="error-js-oc" style="" class="alert alert-danger">
             <ol>
                 {foreach $errorMsg as $msg}
-                    <li class="error-oc">{$msg}</li>
+                    <li class="error-oc">{$msg|escape:'html':'UTF-8'}</li>
                 {/foreach}
             </ol>
         </div>
