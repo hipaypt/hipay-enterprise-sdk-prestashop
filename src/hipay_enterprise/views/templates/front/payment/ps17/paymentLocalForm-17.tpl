@@ -30,7 +30,7 @@
 </form>
 
 <script>
-    document.addEventListener('DOMContentLoaded', formListener{$localPaymentName|regex_replace:'/[^a-zA-Z0-9]/'|escape:'html':'UTF-8':""}, false);
+    document.addEventListener('DOMContentLoaded', formListener{$localPaymentName|regex_replace:'/[^a-zA-Z0-9]/':""|escape:'html':'UTF-8'}, false);
 
     function formListener{$localPaymentName|regex_replace:'/[^a-zA-Z0-9]/':""}() {
         $("#{$localPaymentName|escape:'html':'UTF-8'}-hipay").submit(function (e) {
