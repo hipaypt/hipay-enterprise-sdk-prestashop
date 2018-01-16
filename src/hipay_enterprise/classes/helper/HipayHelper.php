@@ -581,9 +581,7 @@ class HipayHelper
             return false;
         }
 
-        $ret = (Tools::getIsset($_POST[$key]) ? $_POST[$key] : (Tools::getIsset(
-            $_GET[$key]
-        ) ? $_GET[$key] : $default_value));
+        $ret = (Tools::getIsset($key) ? $_POST[$key] : (Tools::getIsset($key) ? $_GET[$key] : $default_value));
 
         return $ret;
     }

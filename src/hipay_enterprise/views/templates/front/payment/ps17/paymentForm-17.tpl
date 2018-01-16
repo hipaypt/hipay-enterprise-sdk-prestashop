@@ -26,7 +26,7 @@
                 <div class="form-group row group-card">
                     <div class="col-md-1">
                         <span class="custom-radio">
-                            <input type="radio" id="radio-with-token" name="ccTokenHipay" checked="checked" value="{$cc.token|escape:'html':'UTF-8'}"/>
+                            <input type="radio" class="radio-with-token" name="ccTokenHipay" checked="checked" value="{$cc.token|escape:'html':'UTF-8'}"/>
                             <span></span>
                         </span>
                     </div>

@@ -137,7 +137,7 @@ class AdminHiPayCaptureController extends AdminHiPayActionsController
                         '&vieworder#hipay'
                     );
                     die('');
-                } else if (Tools::getValue('total-capture-input') <= 0) {
+                } elseif (Tools::getValue('total-capture-input') <= 0) {
                     $hipay_redirect_status = $this->module->l('Capture amount must be greater than zero.', 'capture');
                     $this->context->cookie->__set('hipay_errors', $hipay_redirect_status);
                     Tools::redirectAdmin(
@@ -147,7 +147,7 @@ class AdminHiPayCaptureController extends AdminHiPayActionsController
                         '&vieworder#hipay'
                     );
                     die('');
-                } else if (Tools::getValue('total-capture-input') > $stillToCapture + 0.01) {
+                } elseif (Tools::getValue('total-capture-input') > $stillToCapture + 0.01) {
                     $hipay_redirect_status = $this->module->l(
                         'Capture amount must be lower than the amount still to be captured.',
                         'capture'
@@ -160,7 +160,7 @@ class AdminHiPayCaptureController extends AdminHiPayActionsController
                         '&vieworder#hipay'
                     );
                     die('');
-                } else if (Tools::getValue('hipay_capture_discount')) {
+                } elseif (Tools::getValue('hipay_capture_discount')) {
                     if (!$capturedDiscounts &&
                         Tools::getValue('hipay_capture_discount') !== "on" &&
                         ($stillToCapture - Tools::getValue('total-capture-input') <=

@@ -28,7 +28,7 @@
         <div class="order_carrier_content box">
             <h2 class="page-subheading">{l s='Pay by credit card' mod='hipay_enterprise'}</h2>
             {include file="$hipay_enterprise_tpl_dir/../front/partial/paymentError.tpl"}
-            <h5><strong>{l s='Amount to pay ' mod='hipay_enterprise'}:</strong> {$amount} {$currency->iso_code} </h5>
+            <h5><strong>{l s='Amount to pay ' mod='hipay_enterprise'}:</strong> {$amount|escape:'html':'UTF-8'} {$currency->iso_code|escape:'html':'UTF-8'} </h5>
             {if $confHipay.payment.global.card_token}
                 {if $savedCC}
                     {* <h2 class="page-subheading">{l s='Pay with a saved credit card' mod='hipay_enterprise'}</h2> *}
@@ -49,7 +49,7 @@
 
                     {foreach $savedCC as $cc}
                         <div class="">
-                            <input type="radio" name="ccTokenHipay" id="ccTokenHipay" value="{$cc.token|escape:'html':'UTF-8'}"/>
+                            <input type="radio" name="ccTokenHipay" class="radio-with-token" checked="checked" value="{$cc.token|escape:'html':'UTF-8'}"/>
                             <label for="ccTokenHipay">
                                 <img src="{$this_path_ssl|escape:'html':'UTF-8'}/views/img/{$cc.brand|lower|escape:'html':'UTF-8'}_small.png"/>
                                 {$cc.pan|escape:'html':'UTF-8'} ({"%02d"|sprintf:$cc.card_expiry_month} / {$cc.card_expiry_year|escape:'html':'UTF-8'})
@@ -101,7 +101,7 @@
         <strong>{l s='Your payment is being processed. Please wait.' mod='hipay_enterprise'}</strong> <br/>
         <img src="{$this_path_ssl|escape:'html':'UTF-8'}/views/img/loading.gif">
     </p>
-    <script type="text/javascript" src="{$this_path_ssl}views/js/card-tokenize.js"></script>
+    <script type="text/javascript" src="{$this_path_ssl|escape:'html':'UTF-8'}views/js/card-tokenize.js"></script>
     <script type="text/javascript">
         {if $savedCC &&  $confHipay.payment.global.card_token}
             $('#credit-card-group').collapse('hide');

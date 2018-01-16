@@ -135,7 +135,7 @@ class AdminHiPayRefundController extends AdminHiPayActionsController
                         '&vieworder#hipay'
                     );
                     die('');
-                } else if (Tools::getValue('total-refund-input') <= 0) {
+                } elseif (Tools::getValue('total-refund-input') <= 0) {
                     $hipay_redirect_status = $this->module->l('Refund amount must be greater than zero.', 'capture');
                     $this->context->cookie->__set('hipay_errors', $hipay_redirect_status);
                     Tools::redirectAdmin(
@@ -145,7 +145,7 @@ class AdminHiPayRefundController extends AdminHiPayActionsController
                         '&vieworder#hipay'
                     );
                     die('');
-                } else if (Tools::getValue('total-refund-input') > $refundableAmount) {
+                } elseif (Tools::getValue('total-refund-input') > $refundableAmount) {
                     $hipay_redirect_status = $this->module->l(
                         'Refund amount must be lower than the amount still to be refunded.',
                         'capture'
@@ -158,7 +158,7 @@ class AdminHiPayRefundController extends AdminHiPayActionsController
                         '&vieworder#hipay'
                     );
                     die('');
-                } else if (Tools::getValue('hipay_refund_discount')) {
+                } elseif (Tools::getValue('hipay_refund_discount')) {
                     if (!$refundedDiscounts &&
                         Tools::getValue('hipay_refund_discount') !== "on" &&
                         ($refundableAmount - Tools::getValue('total-refund-input') <=

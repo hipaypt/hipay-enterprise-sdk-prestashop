@@ -146,7 +146,6 @@ class HipayMail
 
         // === SEND EMAIL === ///
         foreach ($emailsTo as $email) {
-
             $mailSuccess = @Mail::Send(
                 (int)$idLang,
                 $template,

@@ -124,6 +124,7 @@ class HipayEnterpriseNew extends Hipay_enterprise
                     }
                 }
             }
+
             return $paymentOptions;
         } catch (Exception $exc) {
             $this->logs->logException($exc);

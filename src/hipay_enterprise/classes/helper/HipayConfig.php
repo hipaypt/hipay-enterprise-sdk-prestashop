@@ -225,7 +225,6 @@ class HipayConfig
 
         $shops = Shop::getShops(false);
         foreach ($shops as $id => $shop) {
-
             $this->module->getLogs()->logInfos(
                 "get HIPAY_CONFIG for shop " . $id . " and id shop group " . $shop['id_shop_group']
             );
@@ -292,7 +291,6 @@ class HipayConfig
                 $configHipay["payment"][$paymentMethodType][$key],
                 $replace
             );
-
         }
     }
 
