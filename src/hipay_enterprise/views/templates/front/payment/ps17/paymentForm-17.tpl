@@ -53,7 +53,7 @@
         </ul>
     </div>
 
-    {if $savedCC}
+    {if $savedCC &&  $confHipay.payment.global.card_token}
         <div class="option_payment">
                 <span class="custom-radio">
                     <input type="radio" id="radio-no-token" name="ccTokenHipay" value="noToken" />
@@ -62,7 +62,7 @@
             <label for="radio-no-token"><strong>{l s='Pay with a new credit card' mod='hipay_enterprise'}</strong></label>
         </div>
     {/if}
-    <div id="credit-card-group" class="form-group group-card  {if $savedCC}collapse{/if}">
+    <div id="credit-card-group" class="form-group group-card  {if $savedCC &&  $confHipay.payment.global.card_token}collapse{/if}">
         <div class="row">
             {if $savedCC}
             <div class="col-md-1"></div>
